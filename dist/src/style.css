@@ -867,3 +867,65 @@ body{color:var(--bm-ink);background:
   form input,form textarea{font-size:16px!important}
   .form-row{grid-template-columns:1fr!important}
 }
+
+
+/* ========================================================================== */
+/* v34 — Mobile spacing repair + lightweight C4D presentation                 */
+/* ========================================================================== */
+@media(max-width:700px){
+  /* The engine used to inject an extra 270–380px portal before every panel.
+     v34 removes that duplicated spacer so sections follow the real content. */
+  .mobile-scene-portal{display:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important}
+
+  /* Tighter vertical rhythm — no dead viewport-sized gaps between sections. */
+  .hero{padding-top:94px!important;padding-bottom:20px!important}
+  .hero-visual{height:176px!important;min-height:176px!important;margin:2px -22px 2px!important;overflow:hidden!important}
+  .hero-visual::before{inset:4% 10% 4%!important;border-radius:34px!important;background:radial-gradient(circle at 50% 52%,rgba(20,103,255,.11),transparent 56%)!important}
+  .section{padding-top:48px!important;padding-bottom:48px!important}
+  .expertise{padding-top:50px!important;padding-bottom:42px!important}
+  .clients{padding-top:44px!important;padding-bottom:42px!important}
+  .work{padding-top:50px!important;padding-bottom:50px!important}
+  .process{padding-top:42px!important;padding-bottom:30px!important}
+  .cta-section{margin-top:6px!important}
+
+  /* The process visual is now a compact, intentional visual instead of an
+     empty 250px reservation. It is CSS-only so scrolling stays smooth. */
+  .process-visual{
+    display:block!important;width:100%!important;height:136px!important;min-height:136px!important;
+    margin:0 0 22px!important;border-radius:24px!important;overflow:hidden!important;position:relative!important;
+    background:
+      radial-gradient(circle at 72% 28%,rgba(9,185,215,.18),transparent 30%),
+      radial-gradient(circle at 28% 72%,rgba(20,103,255,.14),transparent 34%),
+      linear-gradient(145deg,#eef7ff,#f9fcff)!important;
+    border:1px solid #d9e9f5!important;box-shadow:0 12px 30px rgba(8,43,89,.05)!important
+  }
+  .process-visual::before{
+    content:""!important;display:block!important;position:absolute!important;width:94px!important;height:94px!important;
+    left:50%!important;top:50%!important;transform:translate(-50%,-50%) rotate(-5deg)!important;
+    background:url('/brand/boostmind-mark.webp') center/contain no-repeat!important;opacity:.92!important;
+    filter:drop-shadow(0 14px 18px rgba(20,103,255,.16))!important
+  }
+  .process-visual::after{
+    content:""!important;display:block!important;position:absolute!important;width:190px!important;height:58px!important;
+    left:50%!important;top:52%!important;transform:translate(-50%,-50%) rotate(-7deg)!important;
+    border:1px solid rgba(20,103,255,.20)!important;border-radius:50%!important;box-shadow:0 0 0 18px rgba(9,185,215,.025)!important
+  }
+
+  /* Keep expensive fixed-canvas compositing simple on phones. */
+  .c4d-stage{will-change:auto!important;contain:strict!important}
+  .c4d-stage canvas{will-change:auto!important;filter:none!important}
+  .bm-is-scrolling .c4d-stage canvas{opacity:.82!important}
+
+  /* Prevent legacy reveal transforms from leaving invisible space on phones. */
+  .reveal{transform:none!important}
+  .expert-card.reveal,.project.reveal,.process-list article.reveal{opacity:1!important}
+}
+
+@media(max-width:700px){
+  /* Lightweight visible composition while the lower-resolution WebGL layer runs behind it. */
+  .hero-visual::after{
+    content:"";position:absolute;width:124px;height:124px;left:50%;top:49%;transform:translate(-50%,-50%) rotate(-4deg);
+    background:url('/brand/boostmind-mark.webp') center/contain no-repeat;opacity:.86;
+    filter:drop-shadow(0 18px 24px rgba(20,103,255,.18));
+  }
+}

@@ -1,7 +1,7 @@
 {
-  "name": "boost-mind-mobile-redesign-v33",
+  "name": "boost-mind-mobile-performance-v34",
   "private": true,
-  "version": "33.0.0",
+  "version": "34.0.0",
   "type": "module",
   "engines": {
     "node": ">=20"

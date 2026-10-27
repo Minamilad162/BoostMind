@@ -71,3 +71,9 @@ Cloudflare Pages now sends project inquiry emails through the Cloudflare Email S
 
 ## v33 — Mobile Redesign
 The mobile UI (<=700px) was rebuilt to match the approved Boost Mind mobile concept while keeping desktop unchanged. Trusted Companies remains an automatic looping logo slider. See `V33_MOBILE_REDESIGN.md`.
+
+## v34
+- Mobile spacing repair removes duplicated C4D portal gaps
+- Mobile C4D renderer uses lower resolution and steadier frame pacing
+- C4D pauses behind the Clients logo marquee
+- Process mobile visual uses a lightweight branded composition instead of an empty reserved block

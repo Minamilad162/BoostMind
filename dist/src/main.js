@@ -109,9 +109,15 @@ window.addEventListener('scroll',()=>{
 // v30: keep the Clients section visually clean by fading the global C4D stage out while it is in view.
 const clientsSection=qs('#clients');
 if(clientsSection){
+  let c4dPausedForClients=false;
   const clientsVisualObserver=new IntersectionObserver(entries=>{
     const entry=entries[0];
-    document.documentElement.classList.toggle('bm-clients-active',entry.isIntersecting&&entry.intersectionRatio>0.12);
+    const active=entry.isIntersecting&&entry.intersectionRatio>0.12;
+    document.documentElement.classList.toggle('bm-clients-active',active);
+    if(window.innerWidth<=700){
+      if(active&&!c4dPausedForClients){pauseC4D();c4dPausedForClients=true}
+      else if(!active&&c4dPausedForClients){c4dPausedForClients=false;resumeC4D()}
+    }
   },{threshold:[0,.12,.35,.6]});
   clientsVisualObserver.observe(clientsSection);
 }
