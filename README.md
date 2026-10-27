@@ -63,3 +63,11 @@ Cloudflare Pages now sends project inquiry emails through the Cloudflare Email S
 - Integrated the logo marquee into the normal light site background
 - Increased logo contrast and kept the automatic seamless slider
 - Preserved pause/play control, mobile behavior, reduced-motion fallback and email flow
+
+
+## v32
+- Moved the Trusted Companies logo slider directly after the What we build section
+- Updated navigation order to match the new page flow
+
+## v33 — Mobile Redesign
+The mobile UI (<=700px) was rebuilt to match the approved Boost Mind mobile concept while keeping desktop unchanged. Trusted Companies remains an automatic looping logo slider. See `V33_MOBILE_REDESIGN.md`.

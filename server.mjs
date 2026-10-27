@@ -39,4 +39,4 @@ http.createServer(async(req,res)=>{
       res.end(data);
     }catch{res.writeHead(404);res.end('Not found')}
   }
-}).listen(port,()=>console.log(`Boost Mind v24 running at http://localhost:${port}`));
+}).listen(port,()=>console.log(`Boost Mind v33 running at http://localhost:${port}`));

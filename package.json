@@ -1,7 +1,7 @@
 {
-  "name": "boost-mind-clients-clean-v30",
+  "name": "boost-mind-mobile-redesign-v33",
   "private": true,
-  "version": "30.0.0",
+  "version": "33.0.0",
   "type": "module",
   "engines": {
     "node": ">=20"

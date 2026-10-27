@@ -115,3 +115,29 @@ if(clientsSection){
   },{threshold:[0,.12,.35,.6]});
   clientsVisualObserver.observe(clientsSection);
 }
+
+// v33 — mobile expertise swipe indicator
+const mobileExpertiseGrid=qs('.expertise-grid');
+const mobileExpertiseDots=qsa('.mobile-expertise-dots i');
+if(mobileExpertiseGrid&&mobileExpertiseDots.length){
+  let expertiseRaf=0;
+  const updateExpertiseDots=()=>{
+    expertiseRaf=0;
+    if(window.innerWidth>700)return;
+    const cards=qsa('.expert-card',mobileExpertiseGrid);
+    if(!cards.length)return;
+    const gridRect=mobileExpertiseGrid.getBoundingClientRect();
+    let bestIndex=0,bestDistance=Infinity;
+    cards.forEach((card,index)=>{
+      const rect=card.getBoundingClientRect();
+      const distance=Math.abs(rect.left-gridRect.left);
+      if(distance<bestDistance){bestDistance=distance;bestIndex=index}
+    });
+    mobileExpertiseDots.forEach((dot,index)=>dot.classList.toggle('active',index===bestIndex));
+  };
+  mobileExpertiseGrid.addEventListener('scroll',()=>{
+    if(!expertiseRaf)expertiseRaf=requestAnimationFrame(updateExpertiseDots);
+  },{passive:true});
+  window.addEventListener('resize',updateExpertiseDots,{passive:true});
+  updateExpertiseDots();
+}
