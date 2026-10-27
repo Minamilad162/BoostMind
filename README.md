@@ -77,3 +77,6 @@ The mobile UI (<=700px) was rebuilt to match the approved Boost Mind mobile conc
 - Mobile C4D renderer uses lower resolution and steadier frame pacing
 - C4D pauses behind the Clients logo marquee
 - Process mobile visual uses a lightweight branded composition instead of an empty reserved block
+
+## v35
+Mobile WebGL is disabled in favor of lightweight static 3D-style visuals, and all mobile panels use content-driven heights to eliminate dead space.

@@ -325,7 +325,35 @@ body{color:var(--bm-ink);background:
   .process-grid{opacity:.45!important}
   .process-particle{box-shadow:0 8px 20px rgba(13,46,78,.09)!important}
 }
-\n\n/* v24 — adaptive performance / compositing */\n.c4d-stage{transform:translateZ(0);backface-visibility:hidden}\n.c4d-stage canvas{image-rendering:auto}\n.project,.expert-card,.client-logo,.client-text{contain:layout paint style}\n.project img{transform:translateZ(0);backface-visibility:hidden}\n.capability-track,.process-grid,.process-orbit,.process-beam,.process-particle,.process-badge{will-change:auto}\n@media(max-width:1100px){\n  .site-header,.capability-rail{backdrop-filter:none!important}\n  .expert-card,.project,.client-logo,.client-text{box-shadow:0 10px 26px rgba(11,49,95,.10)!important}\n}\n@media(max-width:700px){\n  .ambient{display:none!important}\n  .process-glow{filter:blur(9px)!important}\n  .process-badge{box-shadow:0 8px 18px rgba(19,48,67,.07)!important}\n  .project:hover,.expert-card:hover{transform:none!important}\n  .c4d-stage canvas{transition:opacity .32s ease}\n}\n@media(prefers-reduced-data:reduce){.capability-track,.process-grid,.process-orbit,.process-beam,.process-particle,.process-badge{animation:none!important}}\n\n.bm-is-scrolling .capability-track,.bm-is-scrolling .process-grid,.bm-is-scrolling .process-orbit,.bm-is-scrolling .process-beam,.bm-is-scrolling .process-particle,.bm-is-scrolling .process-badge{animation-play-state:paused!important}\n.bm-is-scrolling .site-header{backdrop-filter:none!important}\n@media(max-width:700px){\n  .process-grid,.process-orbit,.process-beam,.process-particle,.process-badge{animation:none!important}\n  .process-visual{transition:none!important}\n  .capability-track{animation-duration:34s!important}\n}\n
+
+
+/* v24 — adaptive performance / compositing */
+.c4d-stage{transform:translateZ(0);backface-visibility:hidden}
+.c4d-stage canvas{image-rendering:auto}
+.project,.expert-card,.client-logo,.client-text{contain:layout paint style}
+.project img{transform:translateZ(0);backface-visibility:hidden}
+.capability-track,.process-grid,.process-orbit,.process-beam,.process-particle,.process-badge{will-change:auto}
+@media(max-width:1100px){
+  .site-header,.capability-rail{backdrop-filter:none!important}
+  .expert-card,.project,.client-logo,.client-text{box-shadow:0 10px 26px rgba(11,49,95,.10)!important}
+}
+@media(max-width:700px){
+  .ambient{display:none!important}
+  .process-glow{filter:blur(9px)!important}
+  .process-badge{box-shadow:0 8px 18px rgba(19,48,67,.07)!important}
+  .project:hover,.expert-card:hover{transform:none!important}
+  .c4d-stage canvas{transition:opacity .32s ease}
+}
+@media(prefers-reduced-data:reduce){.capability-track,.process-grid,.process-orbit,.process-beam,.process-particle,.process-badge{animation:none!important}}
+
+.bm-is-scrolling .capability-track,.bm-is-scrolling .process-grid,.bm-is-scrolling .process-orbit,.bm-is-scrolling .process-beam,.bm-is-scrolling .process-particle,.bm-is-scrolling .process-badge{animation-play-state:paused!important}
+.bm-is-scrolling .site-header{backdrop-filter:none!important}
+@media(max-width:700px){
+  .process-grid,.process-orbit,.process-beam,.process-particle,.process-badge{animation:none!important}
+  .process-visual{transition:none!important}
+  .capability-track{animation-duration:34s!important}
+}
+
 
 /* v28 — automatic client logo marquee */
 .clients{
@@ -928,4 +956,125 @@ body{color:var(--bm-ink);background:
     background:url('/brand/boostmind-mark.webp') center/contain no-repeat;opacity:.86;
     filter:drop-shadow(0 18px 24px rgba(20,103,255,.18));
   }
+}
+
+
+/* ========================================================================== */
+/* v35 — Mobile hard reset: no WebGL, no dead vertical space                  */
+/* ========================================================================== */
+.mobile-visual-orbit,.mobile-visual-panel,.mobile-visual-mark,.mobile-visual-dot{display:none}
+
+@media(max-width:700px){
+  /* WebGL/C4D is intentionally desktop-only. On phones this removes the fixed
+     full-screen compositor that was causing jank and visually empty regions. */
+  .c4d-stage{display:none!important}
+  #webgl-canvas{display:none!important}
+
+  /* Hard layout reset: no legacy scene/panel rule may reserve viewport space. */
+  .panel,
+  .hero.panel,
+  .expertise.panel,
+  .work.panel,
+  .process.panel,
+  .cta-section.panel{
+    min-height:0!important;
+    height:auto!important;
+    max-height:none!important;
+    transform:none!important;
+    inset:auto!important;
+  }
+  .panel>.c4d-mobile-anchor,
+  .c4d-mobile-anchor,
+  .mobile-scene-portal{display:none!important;height:0!important;min-height:0!important;padding:0!important;margin:0!important}
+
+  /* Keep every section attached to its real content instead of viewport-sized scenes. */
+  .hero{
+    display:flex!important;
+    flex-direction:column!important;
+    justify-content:flex-start!important;
+    align-items:stretch!important;
+    gap:0!important;
+    padding:96px 20px 30px!important;
+  }
+  .hero-copy{order:1!important}
+  .hero-visual{
+    order:2!important;
+    display:block!important;
+    position:relative!important;
+    width:100%!important;
+    height:190px!important;
+    min-height:190px!important;
+    max-height:190px!important;
+    margin:22px 0 18px!important;
+    overflow:hidden!important;
+    border:1px solid #dceaf5!important;
+    border-radius:28px!important;
+    background:
+      radial-gradient(circle at 72% 28%,rgba(10,185,215,.18),transparent 31%),
+      radial-gradient(circle at 25% 75%,rgba(20,103,255,.15),transparent 34%),
+      linear-gradient(145deg,#f8fcff,#eaf5fd)!important;
+    box-shadow:0 14px 34px rgba(8,43,89,.06)!important;
+  }
+  .hero-visual::before,.hero-visual::after{display:none!important}
+  .mobile-visual-orbit,.mobile-visual-panel,.mobile-visual-mark,.mobile-visual-dot{display:block!important;position:absolute!important}
+  .mobile-visual-orbit{
+    width:250px;height:84px;left:50%;top:52%;transform:translate(-50%,-50%) rotate(-8deg);
+    border:1px solid rgba(20,103,255,.22);border-radius:50%;
+    box-shadow:0 0 0 20px rgba(9,185,215,.025)
+  }
+  .mobile-visual-panel{
+    width:76px;height:104px;top:42px;border-radius:16px;
+    background:linear-gradient(155deg,rgba(255,255,255,.92),rgba(117,205,247,.48));
+    border:1px solid rgba(49,150,220,.28);box-shadow:0 14px 30px rgba(15,87,157,.10);
+    transform:skewY(-6deg) rotate(-5deg)
+  }
+  .mobile-visual-panel.panel-a{left:20%;opacity:.78}
+  .mobile-visual-panel.panel-b{left:calc(50% - 38px);top:28px;height:126px;background:linear-gradient(155deg,#fff,#9cdcf7);z-index:2}
+  .mobile-visual-panel.panel-c{right:19%;transform:skewY(6deg) rotate(5deg);opacity:.84}
+  .mobile-visual-mark{
+    width:86px!important;height:auto!important;left:50%!important;top:51%!important;z-index:4!important;
+    transform:translate(-50%,-50%)!important;filter:drop-shadow(0 14px 18px rgba(20,103,255,.18))!important
+  }
+  .mobile-visual-dot{width:9px;height:9px;border-radius:50%;background:#0bb8d6;box-shadow:0 0 0 5px rgba(11,184,214,.08)}
+  .mobile-visual-dot.dot-a{left:14%;top:34%}.mobile-visual-dot.dot-b{right:13%;top:27%;background:#1767ff}.mobile-visual-dot.dot-c{right:20%;bottom:18%;width:6px;height:6px}
+
+  /* Compact hero metrics: attached directly to the hero, never floating in empty space. */
+  .hero-trust{margin-top:0!important}
+  .mobile-hero-signature{margin-top:16px!important}
+
+  /* Section rhythm — intentionally tight on phone. */
+  .section{padding:42px 20px!important}
+  .expertise{padding:42px 20px 38px!important}
+  .clients{padding:38px 0 36px!important}
+  .work{padding:42px 20px 44px!important}
+  .process{
+    display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;
+    padding:42px 20px 38px!important;gap:0!important
+  }
+  .process-visual{
+    order:0!important;height:122px!important;min-height:122px!important;max-height:122px!important;
+    margin:0 0 24px!important;flex:none!important
+  }
+  .process-content{order:1!important;min-height:0!important}
+  .process-list{margin-top:24px!important}
+
+  .work-head,.section-head{margin-bottom:20px!important}
+  .projects-grid{gap:12px!important}
+  .project,.project-featured{height:270px!important;min-height:270px!important}
+  .project-featured{height:290px!important;min-height:290px!important}
+
+  /* CTA must hug its copy; no scene-sized area above the button/text. */
+  .cta-section{
+    display:block!important;
+    min-height:0!important;height:auto!important;
+    padding:26px 18px 22px!important;
+    margin:4px 14px 24px!important;
+    align-items:start!important;justify-content:start!important
+  }
+  .cta-copy{margin:0!important;padding:0!important;transform:none!important}
+  .cta-copy>span{display:block!important;margin:0!important}
+  .cta-copy h2{margin:6px 0 16px!important}
+  .contact-actions{margin:0!important}
+
+  footer{padding-top:20px!important}
 }

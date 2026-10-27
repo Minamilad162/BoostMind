@@ -46,10 +46,16 @@ let c4dLoadPromise=null;
 const connection=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
 const saveData=Boolean(connection?.saveData);
 const reducedMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+const mobileStaticVisual=window.matchMedia?.('(max-width: 700px)').matches;
 const verySlowConnection=['slow-2g','2g'].includes(connection?.effectiveType);
 
+if(mobileStaticVisual){
+  document.documentElement.classList.add('mobile-static-visuals');
+  c4dStage?.classList.add('c4d-mobile-static');
+}
+
 function loadC4D(){
-  if(c4dLoadPromise||saveData||reducedMotion)return c4dLoadPromise;
+  if(c4dLoadPromise||saveData||reducedMotion||mobileStaticVisual)return c4dLoadPromise;
   c4dStage?.classList.add('c4d-loading');
   c4dLoadPromise=import('/assets/c4d-scroll-engine.js')
     .then(()=>{
@@ -66,6 +72,7 @@ function loadC4D(){
 }
 
 function scheduleC4D(){
+  if(mobileStaticVisual){c4dStage?.classList.add('c4d-mobile-static');return;}
   if(saveData||reducedMotion){c4dStage?.classList.add('c4d-fallback');return;}
   const startFromIntent=()=>setTimeout(loadC4D,40);
   const start=()=>{
