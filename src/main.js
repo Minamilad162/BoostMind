@@ -6,6 +6,7 @@ toggle?.addEventListener('click',()=>{const open=menu.classList.toggle('open');t
 
 const projects={
 cheiron:{category:'Enterprise HSE Intelligence',title:'CHEIRON Executive HSE Dashboard',description:'One place for HSE performance, trends and management reporting',image:'/projects/cheiron.webp',video:'/projects/cheiron.mp4',tags:['Executive dashboards','Incident analytics','Role-based access','Reporting']},
+bowtie:{category:'Process Safety · Risk Analysis',title:'BowTie Risk Analysis',description:'A visual way to explore threats, preventive barriers, the top event, and mitigation barriers around process-safety risks',image:'/projects/bowtie-risk-analysis.webp',video:null,tags:['BowTie diagrams','Threats & consequences','Preventive barriers','Mitigation barriers']},
 moc:{category:'Enterprise Workflow',title:'MOC & Action Tracker',description:'A clear workflow for approvals, actions, owners and deadlines',image:'/projects/moc-tracker.webp',video:'/projects/moc-tracker.mp4',tags:['Approvals','Action tracking','Deadlines','Operational workflow']},
 mcdc:{category:'Sports Platform',title:'MCDC Academy Platform',description:'A bilingual platform for academy operations, tournaments and results',image:'/projects/mcdc-academy.webp',video:'/projects/mcdc-academy.mp4',tags:['Arabic & English','Tournament management','Player stats','Admin tools']},
 kemit:{category:'Luxury Commerce',title:'Kemit Perfume Web App',description:'A premium bilingual storefront built around the perfume buying experience',image:'/projects/kemit-commerce.webp',video:'/projects/kemit-commerce.mp4',tags:['Premium UI','Bilingual','Commerce','Product catalog']},
@@ -13,7 +14,7 @@ media:{category:'Marketing Analytics',title:'Media Buyer Analytics Studio',descr
 padel:{category:'Smart Automation',title:'We Padel Slot Watcher',description:'Automatic slot monitoring with filters and instant alerts',image:'/projects/we-padel.webp',video:'/projects/we-padel.mp4',tags:['Availability monitoring','Scheduling','Alerts','Filters']}
 };
 const pmodal=qs('#project-modal'),pimg=qs('#project-image'),pvideo=qs('#project-video'),play=qs('#play-demo');let activeProject=null,lastTrigger=null;
-async function videoExists(url){try{const r=await fetch(url,{method:'HEAD'});return r.ok}catch{return false}}
+async function videoExists(url){if(!url)return false;try{const r=await fetch(url,{method:'HEAD'});return r.ok}catch{return false}}
 qsa('[data-project]').forEach(btn=>btn.addEventListener('click',async()=>{const p=projects[btn.dataset.project];if(!p)return;activeProject=p;lastTrigger=btn;qs('#project-category').textContent=p.category;qs('#project-title').textContent=p.title;qs('#project-description').textContent=p.description;qs('#project-tags').innerHTML=p.tags.map(t=>`<span>${t}</span>`).join('');pimg.src=p.image;pimg.alt=p.title;pimg.hidden=false;pvideo.hidden=true;pvideo.pause();pvideo.removeAttribute('src');play.hidden=true;pmodal.showModal();pauseC4D();if(await videoExists(p.video)){play.hidden=false}}));
 play?.addEventListener('click',()=>{if(!activeProject)return;pvideo.src=activeProject.video;pvideo.poster=activeProject.image;pvideo.hidden=false;pimg.hidden=true;play.hidden=true;pvideo.play().catch(()=>{})});
 function closeProject(){if(!pmodal.open)return;pvideo.pause();pmodal.close();resumeC4D();lastTrigger?.focus()}
@@ -29,8 +30,9 @@ form?.addEventListener('submit',async e=>{e.preventDefault();if(!form.checkValid
 // v38 — soft scroll reveals. Content stays in normal document flow; only opacity/transform animate.
 const motionReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 const revealGroups = [
-  ['#home', ['.hero-kicker','.hero h1','.hero-copy>p','.hero-actions','.hero-trust','.mobile-hero-signature','.hero-visual']],
-  ['#expertise', ['.section-head h2','.section-head>p','.expert-card','.mobile-expertise-dots','.mobile-capability-shortcuts>div']],
+  ['#home', ['.hero-kicker','.hero h1','.hero-copy>p','.hero-actions','.mobile-hero-signature','.hero-visual']],
+  ['.statement', ['p','h2']],
+  ['#expertise', ['.section-head h2','.section-head>p','.solution-tab','.solution-panel']],
   ['#clients', ['.clients-heading h2','.logo-marquee']],
   ['#work', ['.work-head h2','.work-head>p','.project']],
   ['#process', ['.process-visual','.process-content>h2','.process-content>p','.process-list article']],
@@ -167,28 +169,42 @@ if(clientsSection){
   clientsVisualObserver.observe(clientsSection);
 }
 
-// v33 — mobile expertise swipe indicator
-const mobileExpertiseGrid=qs('.expertise-grid');
-const mobileExpertiseDots=qsa('.mobile-expertise-dots i');
-if(mobileExpertiseGrid&&mobileExpertiseDots.length){
-  let expertiseRaf=0;
-  const updateExpertiseDots=()=>{
-    expertiseRaf=0;
-    if(window.innerWidth>700)return;
-    const cards=qsa('.expert-card',mobileExpertiseGrid);
-    if(!cards.length)return;
-    const gridRect=mobileExpertiseGrid.getBoundingClientRect();
-    let bestIndex=0,bestDistance=Infinity;
-    cards.forEach((card,index)=>{
-      const rect=card.getBoundingClientRect();
-      const distance=Math.abs(rect.left-gridRect.left);
-      if(distance<bestDistance){bestDistance=distance;bestIndex=index}
-    });
-    mobileExpertiseDots.forEach((dot,index)=>dot.classList.toggle('active',index===bestIndex));
+// v39 — useful, accessible capability explorer, independent from WebGL.
+const serviceExamples={
+  platforms:{number:'01',title:'Workflows that actually move',description:'One clear place to track requests, approvals and ownership across your team',steps:[['Request','Capture the details'],['Approve','Route to the right person'],['Track','See what’s done']],benefit:'Clear ownership, fewer missed actions',footer:'Built to fit your team, not the other way around'},
+  dashboards:{number:'02',title:'A clearer picture, every day',description:'Turn everyday data into an easy view of trends, performance and the next action',steps:[['Connect','Bring in your data'],['Measure','Find the signals'],['Decide','Share the insight']],benefit:'Answers your team can act on',footer:'The right numbers, without the clutter'},
+  automation:{number:'03',title:'Less chasing, more doing',description:'Automate routine handoffs, reminders and approvals without losing control',steps:[['Trigger','A request comes in'],['Route','Notify the owner'],['Complete','Close the loop']],benefit:'Fewer repetitive follow-ups',footer:'Keep the process moving automatically'},
+  apis:{number:'04',title:'Your tools, connected',description:'Connect existing systems so the same information does not have to be entered twice',steps:[['Source','Read the data'],['Connect','Map the systems'],['Sync','Keep it updated']],benefit:'More consistent data across tools',footer:'One connected workflow, not isolated apps'},
+  web:{number:'05',title:'An easier way to get things done',description:'Give your team or customers a focused app that works beautifully on any screen',steps:[['Explore','Find what matters'],['Interact','Finish the task'],['Manage','Stay in control']],benefit:'A simpler experience for everyone',footer:'Built around the person using it'},
+  monitoring:{number:'06',title:'Spot changes earlier',description:'Track important signals and alert the right person when attention is needed',steps:[['Watch','Track the signal'],['Detect','Match the rules'],['Alert','Reach the owner']],benefit:'Timely alerts and clearer follow-up',footer:'Know what changed and what to do next'}
+};
+const serviceTabs=qsa('.solution-tab');
+const servicePanel=qs('#solution-panel');
+function activateService(key, focus=false){
+  const data=serviceExamples[key]; if(!data||!servicePanel)return;
+  const activeTab=serviceTabs.find(t=>t.dataset.service===key);
+  serviceTabs.forEach(t=>{const active=t===activeTab;t.classList.toggle('is-active',active);t.setAttribute('aria-selected',String(active));t.tabIndex=active?0:-1});
+  servicePanel.setAttribute('aria-labelledby',activeTab.id);
+  const fields={
+    '#solution-index':`${data.number} / 06`, '#solution-title':data.title,
+    '#solution-description':data.description,'#solution-benefit':data.benefit,
+    '#solution-footer':data.footer,
   };
-  mobileExpertiseGrid.addEventListener('scroll',()=>{
-    if(!expertiseRaf)expertiseRaf=requestAnimationFrame(updateExpertiseDots);
-  },{passive:true});
-  window.addEventListener('resize',updateExpertiseDots,{passive:true});
-  updateExpertiseDots();
+  Object.entries(fields).forEach(([id,val])=>{const el=qs(id);if(el)el.textContent=val});
+  data.steps.forEach(([title,caption],i)=>{
+    const n=i+1;qs(`#solution-step-${n}`).textContent=title;
+    qs(`#solution-step-caption-${n}`).textContent=caption;
+  });
+  servicePanel.classList.remove('solution-swapped');
+  // Force animation restart only when motion is permitted.
+  if(!motionReduced){void servicePanel.offsetWidth;servicePanel.classList.add('solution-swapped')}
+  if(focus)activeTab.focus();
 }
+serviceTabs.forEach((tab,index)=>{
+  tab.addEventListener('click',()=>activateService(tab.dataset.service));
+  tab.addEventListener('keydown',e=>{
+    const direction=(e.key==='ArrowRight'||e.key==='ArrowDown')?1:(e.key==='ArrowLeft'||e.key==='ArrowUp')?-1:0;
+    if(direction){e.preventDefault();const next=serviceTabs[(index+direction+serviceTabs.length)%serviceTabs.length];activateService(next.dataset.service,true)}
+    if(e.key==='Home'||e.key==='End'){e.preventDefault();const next=serviceTabs[e.key==='Home'?0:serviceTabs.length-1];activateService(next.dataset.service,true)}
+  });
+});

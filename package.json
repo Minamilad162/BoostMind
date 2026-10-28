@@ -1,7 +1,7 @@
 {
-  "name": "boost-mind-scroll-reveal-v38",
+  "name": "boost-mind-premium-services-v39",
   "private": true,
-  "version": "38.0.0",
+  "version": "39.0.0",
   "type": "module",
   "engines": {
     "node": ">=20"

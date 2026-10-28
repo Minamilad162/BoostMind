@@ -87,3 +87,6 @@ C4D/WebGL is desktop-only. Mobile never loads the animation engine and uses ligh
 ## v38
 - Added subtle staggered scroll reveal animations across the site
 - Mobile uses lightweight fade/rise motion with no WebGL changes
+
+## v39 — Services & Portfolio
+See `V39_PREMIUM_SERVICES_AND_PROJECTS.md` for the compact interactive service explorer, Clients section relocation and the BowTie Risk Analysis portfolio card. The existing CHEIRON Executive HSE Dashboard remains the HSE Dashboard project; no duplicate project card was created. The BowTie preview is illustrative and can be replaced with a real screenshot later.
