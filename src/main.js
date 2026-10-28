@@ -40,13 +40,32 @@ if(processVisual&&processSteps.length){
 }
 
 
+// v36: hard mobile isolation. Phones never run or keep the fixed C4D compositor.
+const bmHardMobile = document.documentElement.getAttribute('data-mobile-ui') === '1' ||
+  window.matchMedia?.('(max-width: 900px)').matches ||
+  window.matchMedia?.('(hover: none) and (pointer: coarse)').matches;
+
+if (bmHardMobile) {
+  document.documentElement.setAttribute('data-mobile-ui','1');
+  const purgeMobileC4D = () => {
+    document.querySelector('#visual-stage')?.remove();
+    document.querySelectorAll('.mobile-scene-portal,.c4d-mobile-anchor canvas').forEach(el => el.remove());
+  };
+  purgeMobileC4D();
+  if ('MutationObserver' in window && document.body) {
+    const mobileC4DGuard = new MutationObserver(purgeMobileC4D);
+    mobileC4DGuard.observe(document.body,{childList:true,subtree:true});
+    window.setTimeout(()=>mobileC4DGuard.disconnect(),8000);
+  }
+}
+
 // v21: Progressive C4D loader — keep first paint fast, then start WebGL when the browser is idle.
 const c4dStage=qs('#visual-stage');
 let c4dLoadPromise=null;
 const connection=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
 const saveData=Boolean(connection?.saveData);
 const reducedMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-const mobileStaticVisual=window.matchMedia?.('(max-width: 700px)').matches;
+const mobileStaticVisual=bmHardMobile;
 const verySlowConnection=['slow-2g','2g'].includes(connection?.effectiveType);
 
 if(mobileStaticVisual){
@@ -57,7 +76,7 @@ if(mobileStaticVisual){
 function loadC4D(){
   if(c4dLoadPromise||saveData||reducedMotion||mobileStaticVisual)return c4dLoadPromise;
   c4dStage?.classList.add('c4d-loading');
-  c4dLoadPromise=import('/assets/c4d-scroll-engine.js')
+  c4dLoadPromise=import('/assets/c4d-scroll-engine.js?v=36')
     .then(()=>{
       c4dStage?.classList.remove('c4d-loading');
       c4dStage?.classList.add('c4d-ready');

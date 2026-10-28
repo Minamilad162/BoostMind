@@ -8,7 +8,16 @@
   <link rel="icon" href="/favicon.png" />
   <link rel="preload" as="image" href="/brand/boostmind-logo.webp" fetchpriority="high" />
   <link rel="preload" as="image" href="/brand/boostmind-mark.webp" />
-  <link rel="stylesheet" href="/src/style.css" />
+  <script>
+    (function(){
+      var mobile = window.matchMedia && (
+        window.matchMedia('(max-width: 900px)').matches ||
+        window.matchMedia('(hover: none) and (pointer: coarse)').matches
+      );
+      if (mobile) document.documentElement.setAttribute('data-mobile-ui','1');
+    })();
+  </script>
+  <link rel="stylesheet" href="/src/style.css?v=36" />
   <title>Boost Mind — Custom Software & Automation</title>
 </head>
 <body>
@@ -146,7 +155,7 @@
   <p class="form-direct-email">Or email us at <a href="mailto:info@boostmind-tech.com">info@boostmind-tech.com</a></p>
 </form><div class="inquiry-success" id="inquiry-success" hidden><div>✓</div><h3>Project brief sent</h3><p>Thanks, we’ll get back to you soon</p><button type="button" id="success-close">Close</button></div></div></div></dialog>
 
-  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/main.js?v=36"></script>
   <!-- C4D engine is loaded progressively by /src/main.js after first paint -->
 </body>
 </html>
