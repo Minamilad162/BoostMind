@@ -1359,3 +1359,70 @@ body{color:var(--bm-ink);background:
     transform:none!important;
   }
 }
+
+/* ========================================================================== */
+/* v38 — soft scroll reveal motion                                             */
+/* ========================================================================== */
+.scroll-reveal{
+  opacity:0;
+  transform:translate3d(0,16px,0) scale(.995);
+  filter:blur(2px);
+  transition:
+    opacity .62s cubic-bezier(.22,.61,.36,1),
+    transform .72s cubic-bezier(.22,.61,.36,1),
+    filter .55s ease;
+  transition-delay:calc(var(--reveal-order,0) * 70ms);
+  will-change:opacity,transform,filter;
+}
+.scroll-reveal.is-visible{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
+  filter:blur(0);
+  will-change:auto;
+}
+
+/* Project and capability cards get a slightly shorter movement so scrolling stays calm. */
+.expert-card.scroll-reveal,
+.project.scroll-reveal,
+.process-list article.scroll-reveal,
+.mobile-capability-shortcuts>div.scroll-reveal{
+  transform:translate3d(0,12px,0) scale(.992);
+}
+.expert-card.scroll-reveal.is-visible,
+.project.scroll-reveal.is-visible,
+.process-list article.scroll-reveal.is-visible,
+.mobile-capability-shortcuts>div.scroll-reveal.is-visible{
+  transform:translate3d(0,0,0) scale(1);
+}
+
+/* The continuously moving company rail fades as a single unit; its own marquee motion stays untouched. */
+.logo-marquee.scroll-reveal{transform:translate3d(0,10px,0)}
+.logo-marquee.scroll-reveal.is-visible{transform:translate3d(0,0,0)}
+
+@media (max-width:900px), (hover:none) and (pointer:coarse){
+  .scroll-reveal{
+    transform:translate3d(0,12px,0)!important;
+    filter:none;
+    transition-duration:.52s,.58s,0s;
+    transition-delay:calc(var(--reveal-order,0) * 55ms);
+  }
+  .scroll-reveal.is-visible{transform:translate3d(0,0,0)!important}
+  .hero-visual.scroll-reveal{transform:translate3d(0,8px,0)!important}
+  .hero-visual.scroll-reveal.is-visible{transform:translate3d(0,0,0)!important}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .scroll-reveal,
+  .scroll-reveal.is-visible{
+    opacity:1!important;
+    transform:none!important;
+    filter:none!important;
+    transition:none!important;
+  }
+}
+
+@media (min-width:901px) and (hover:hover) and (pointer:fine){
+  .expert-card.scroll-reveal.is-visible:hover{transform:translateY(-7px)}
+  .process-list article.scroll-reveal.is-visible.active,
+  .process-list article.scroll-reveal.is-visible:hover{transform:translateX(12px)}
+}

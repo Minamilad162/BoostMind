@@ -1,7 +1,7 @@
 {
-  "name": "boost-mind-mobile-no-c4d-v37",
+  "name": "boost-mind-scroll-reveal-v38",
   "private": true,
-  "version": "37.0.0",
+  "version": "38.0.0",
   "type": "module",
   "engines": {
     "node": ">=20"

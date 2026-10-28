@@ -83,3 +83,7 @@ Mobile WebGL is disabled in favor of lightweight static 3D-style visuals, and al
 
 ## v37
 C4D/WebGL is desktop-only. Mobile never loads the animation engine and uses lightweight in-flow visuals instead.
+
+## v38
+- Added subtle staggered scroll reveal animations across the site
+- Mobile uses lightweight fade/rise motion with no WebGL changes

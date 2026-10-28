@@ -26,7 +26,46 @@ qsa('[data-open-inquiry]').forEach(el=>el.addEventListener('click',e=>{e.prevent
 function payload(){const fd=new FormData(form);return{fullName:fd.get('full-name'),email:fd.get('email'),phone:fd.get('phone'),projectBrief:fd.get('project-brief'),referenceLink:fd.get('reference-link'),botField:fd.get('bot-field'),formOpenedAt,sourcePage:location.href}}
 form?.addEventListener('submit',async e=>{e.preventDefault();if(!form.checkValidity()){form.reportValidity();return}submit.disabled=true;submit.classList.add('is-loading');status.textContent='Sending your project brief';try{let result;if(['localhost','127.0.0.1'].includes(location.hostname)){await new Promise(r=>setTimeout(r,550));result={ok:true,message:'Local preview only — email is sent after deployment on Cloudflare Pages'}}else{if(!navigator.onLine)throw new Error('You appear to be offline');const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),15000);let r;try{r=await fetch(new URL('/api/project-inquiry',location.origin),{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload()),cache:'no-store',credentials:'same-origin',signal:controller.signal})}finally{clearTimeout(timeout)}const raw=await r.text();try{result=JSON.parse(raw)}catch{result={ok:false,message:r.ok?'The server returned an unreadable response':'The project form service is unavailable'}}if(!r.ok||!result.ok){const err=new Error(result.message||'Could not send your request');err.code=result.code;throw err}}form.reset();form.hidden=true;success.hidden=false;success.querySelector('p').textContent=result.message||'Thanks, we’ll review the details and get back to you soon'}catch(err){let message;if(err?.name==='AbortError'){message='The request took too long, please try again'}else if(!navigator.onLine){message='No internet connection — reconnect and try again'}else if(err?.code==='EMAIL_NOT_CONFIGURED'){message='The project email service is not configured yet'}else if(err instanceof TypeError&&/fetch/i.test(err.message)){message='Could not reach the project form service'}else{message=err.message||'Could not send your request right now'}status.textContent=message+' You can also email info@boostmind-tech.com'}finally{submit.disabled=false;submit.classList.remove('is-loading')}});
 
-const revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')}),{threshold:.12});qsa('.expert-card,.project,.process-list article,.client-logo,.client-text').forEach(el=>{el.classList.add('reveal');revealObserver.observe(el)});
+// v38 — soft scroll reveals. Content stays in normal document flow; only opacity/transform animate.
+const motionReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+const revealGroups = [
+  ['#home', ['.hero-kicker','.hero h1','.hero-copy>p','.hero-actions','.hero-trust','.mobile-hero-signature','.hero-visual']],
+  ['#expertise', ['.section-head h2','.section-head>p','.expert-card','.mobile-expertise-dots','.mobile-capability-shortcuts>div']],
+  ['#clients', ['.clients-heading h2','.logo-marquee']],
+  ['#work', ['.work-head h2','.work-head>p','.project']],
+  ['#process', ['.process-visual','.process-content>h2','.process-content>p','.process-list article']],
+  ['#contact', ['.cta-copy>span','.cta-copy>h2','.contact-actions']],
+  ['footer', ['.footer-brand-full','p','.footer-email','span']]
+];
+
+const revealItems=[];
+revealGroups.forEach(([rootSelector, selectors])=>{
+  const root=qs(rootSelector);
+  if(!root)return;
+  let order=0;
+  selectors.forEach(selector=>{
+    qsa(selector,root).forEach(el=>{
+      if(revealItems.includes(el))return;
+      el.classList.add('scroll-reveal');
+      el.style.setProperty('--reveal-order', String(Math.min(order,6)));
+      revealItems.push(el);
+      order++;
+    });
+  });
+});
+
+if(motionReduced || !('IntersectionObserver' in window)){
+  revealItems.forEach(el=>el.classList.add('is-visible'));
+}else{
+  const scrollRevealObserver=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting)return;
+      entry.target.classList.add('is-visible');
+      scrollRevealObserver.unobserve(entry.target);
+    });
+  },{threshold:.08,rootMargin:'0px 0px -7% 0px'});
+  revealItems.forEach(el=>scrollRevealObserver.observe(el));
+}
 
 
 const processSection=qs('#process'),processVisual=qs('.process-visual',processSection),processSteps=qsa('.process-list article',processSection);
