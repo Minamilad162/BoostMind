@@ -1343,3 +1343,19 @@ body{color:var(--bm-ink);background:
   html[data-mobile-ui="1"] video,
   html[data-mobile-ui="1"] canvas{max-width:100%}
 }
+
+
+/* ==========================================================================
+   v37 — C4D DESKTOP ONLY
+   Mobile/tablet touch layouts never display the global WebGL compositor.
+   ========================================================================== */
+@media (max-width:900px), (hover:none) and (pointer:coarse){
+  #visual-stage,.c4d-stage,.c4d-stage canvas,.mobile-scene-portal,.c4d-mobile-anchor{
+    display:none!important;visibility:hidden!important;opacity:0!important;
+    width:0!important;height:0!important;min-height:0!important;max-height:0!important;
+    margin:0!important;padding:0!important;overflow:hidden!important;pointer-events:none!important;
+  }
+  .hero,.section,.clients,.work,.process,.cta-section{
+    transform:none!important;
+  }
+}

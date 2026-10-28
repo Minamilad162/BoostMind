@@ -10,14 +10,24 @@
   <link rel="preload" as="image" href="/brand/boostmind-mark.webp" />
   <script>
     (function(){
-      var mobile = window.matchMedia && (
-        window.matchMedia('(max-width: 900px)').matches ||
-        window.matchMedia('(hover: none) and (pointer: coarse)').matches
-      );
-      if (mobile) document.documentElement.setAttribute('data-mobile-ui','1');
+      var desktopC4D = window.matchMedia &&
+        window.matchMedia('(min-width: 901px)').matches &&
+        window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (desktopC4D) {
+        document.documentElement.setAttribute('data-desktop-c4d','1');
+      } else {
+        document.documentElement.setAttribute('data-mobile-ui','1');
+      }
     })();
   </script>
-  <link rel="stylesheet" href="/src/style.css?v=36" />
+  <style>
+    /* v37 critical guard: C4D is desktop-only from the first paint */
+    html:not([data-desktop-c4d="1"]) #visual-stage,
+    html:not([data-desktop-c4d="1"]) .c4d-stage,
+    html:not([data-desktop-c4d="1"]) .mobile-scene-portal,
+    html:not([data-desktop-c4d="1"]) .c4d-mobile-anchor{display:none!important}
+  </style>
+  <link rel="stylesheet" href="/src/style.css?v=37" />
   <title>Boost Mind — Custom Software & Automation</title>
 </head>
 <body>
@@ -155,7 +165,7 @@
   <p class="form-direct-email">Or email us at <a href="mailto:info@boostmind-tech.com">info@boostmind-tech.com</a></p>
 </form><div class="inquiry-success" id="inquiry-success" hidden><div>✓</div><h3>Project brief sent</h3><p>Thanks, we’ll get back to you soon</p><button type="button" id="success-close">Close</button></div></div></div></dialog>
 
-  <script type="module" src="/src/main.js?v=36"></script>
+  <script type="module" src="/src/main.js?v=37"></script>
   <!-- C4D engine is loaded progressively by /src/main.js after first paint -->
 </body>
 </html>

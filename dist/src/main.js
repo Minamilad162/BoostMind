@@ -40,43 +40,25 @@ if(processVisual&&processSteps.length){
 }
 
 
-// v36: hard mobile isolation. Phones never run or keep the fixed C4D compositor.
-const bmHardMobile = document.documentElement.getAttribute('data-mobile-ui') === '1' ||
-  window.matchMedia?.('(max-width: 900px)').matches ||
-  window.matchMedia?.('(hover: none) and (pointer: coarse)').matches;
-
-if (bmHardMobile) {
-  document.documentElement.setAttribute('data-mobile-ui','1');
-  const purgeMobileC4D = () => {
-    document.querySelector('#visual-stage')?.remove();
-    document.querySelectorAll('.mobile-scene-portal,.c4d-mobile-anchor canvas').forEach(el => el.remove());
-  };
-  purgeMobileC4D();
-  if ('MutationObserver' in window && document.body) {
-    const mobileC4DGuard = new MutationObserver(purgeMobileC4D);
-    mobileC4DGuard.observe(document.body,{childList:true,subtree:true});
-    window.setTimeout(()=>mobileC4DGuard.disconnect(),8000);
-  }
-}
-
-// v21: Progressive C4D loader — keep first paint fast, then start WebGL when the browser is idle.
+// v37: C4D is desktop-only. Mobile never loads or keeps the WebGL compositor.
+const desktopC4DEnabled = document.documentElement.getAttribute('data-desktop-c4d') === '1';
 const c4dStage=qs('#visual-stage');
 let c4dLoadPromise=null;
 const connection=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
 const saveData=Boolean(connection?.saveData);
 const reducedMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-const mobileStaticVisual=bmHardMobile;
 const verySlowConnection=['slow-2g','2g'].includes(connection?.effectiveType);
 
-if(mobileStaticVisual){
+if(!desktopC4DEnabled){
   document.documentElement.classList.add('mobile-static-visuals');
-  c4dStage?.classList.add('c4d-mobile-static');
+  c4dStage?.remove();
+  qsa('.mobile-scene-portal,.c4d-mobile-anchor canvas').forEach(el=>el.remove());
 }
 
 function loadC4D(){
-  if(c4dLoadPromise||saveData||reducedMotion||mobileStaticVisual)return c4dLoadPromise;
+  if(!desktopC4DEnabled||c4dLoadPromise||saveData||reducedMotion)return c4dLoadPromise;
   c4dStage?.classList.add('c4d-loading');
-  c4dLoadPromise=import('/assets/c4d-scroll-engine.js?v=36')
+  c4dLoadPromise=import('/assets/c4d-scroll-engine.js?v=37')
     .then(()=>{
       c4dStage?.classList.remove('c4d-loading');
       c4dStage?.classList.add('c4d-ready');
@@ -91,13 +73,12 @@ function loadC4D(){
 }
 
 function scheduleC4D(){
-  if(mobileStaticVisual){c4dStage?.classList.add('c4d-mobile-static');return;}
+  if(!desktopC4DEnabled)return;
   if(saveData||reducedMotion){c4dStage?.classList.add('c4d-fallback');return;}
   const startFromIntent=()=>setTimeout(loadC4D,40);
   const start=()=>{
     if(verySlowConnection){
-      // Preserve bandwidth: wait for intent before loading on very slow links.
-      ['pointerdown','touchstart','scroll'].forEach(type=>window.addEventListener(type,startFromIntent,{once:true,passive:true}));
+      ['pointerdown','scroll'].forEach(type=>window.addEventListener(type,startFromIntent,{once:true,passive:true}));
       return;
     }
     if('requestIdleCallback' in window){requestIdleCallback(loadC4D,{timeout:1100});}
@@ -105,8 +86,7 @@ function scheduleC4D(){
   };
   if(document.readyState==='complete')start();
   else window.addEventListener('load',start,{once:true});
-  // If the visitor interacts before idle time, start immediately.
-  ['pointerdown','touchstart','scroll'].forEach(type=>window.addEventListener(type,startFromIntent,{once:true,passive:true}));
+  ['pointerdown','scroll'].forEach(type=>window.addEventListener(type,startFromIntent,{once:true,passive:true}));
 }
 
 scheduleC4D();

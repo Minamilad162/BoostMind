@@ -80,3 +80,6 @@ The mobile UI (<=700px) was rebuilt to match the approved Boost Mind mobile conc
 
 ## v35
 Mobile WebGL is disabled in favor of lightweight static 3D-style visuals, and all mobile panels use content-driven heights to eliminate dead space.
+
+## v37
+C4D/WebGL is desktop-only. Mobile never loads the animation engine and uses lightweight in-flow visuals instead.

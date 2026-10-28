@@ -1,7 +1,7 @@
 {
-  "name": "boost-mind-mobile-fullwidth-v36",
+  "name": "boost-mind-mobile-no-c4d-v37",
   "private": true,
-  "version": "36.0.0",
+  "version": "37.0.0",
   "type": "module",
   "engines": {
     "node": ">=20"
