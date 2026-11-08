@@ -221,3 +221,13 @@ tailorTabs.forEach((tab,i)=>{
     if(e.key==='Home'||e.key==='End'){e.preventDefault();const next=tailorTabs[e.key==='Home'?0:tailorTabs.length-1];activateTailor(next.dataset.tailor,true)}
   });
 });
+
+
+// v42: Only animate the SVG/CSS workflow while it is visible; remain static with reduced motion.
+const workflowGraphic=qs('.friction-workflow');
+if(workflowGraphic && !motionReduced && 'IntersectionObserver' in window){
+  const workflowObserver=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>entry.target.classList.toggle('is-in-view',entry.isIntersecting));
+  },{threshold:0.08,rootMargin:'30px 0px'});
+  workflowObserver.observe(workflowGraphic);
+}

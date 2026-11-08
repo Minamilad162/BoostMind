@@ -1,7 +1,7 @@
 {
-  "name": "boost-mind-real-product-previews-v41",
+  "name": "boost-mind-animated-workflow-v42",
   "private": true,
-  "version": "41.0.0",
+  "version": "42.0.0",
   "type": "module",
   "engines": {
     "node": ">=20"

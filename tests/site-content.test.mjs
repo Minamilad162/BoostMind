@@ -36,3 +36,13 @@ assert.ok(html.includes('data-project="severo"'));
 assert.ok(html.includes('src="/projects/stop-card-card.webp"'));
 assert.ok(html.includes('src="/projects/bowtie-risk-analysis-card.webp"'));
 console.log('Site coverage: PASS — all 8 requested projects, 12 cards, no Kemet/Padel, no mobile C4D');
+
+
+// v42: animation must be progressive, accessible, lightweight and non-destructive.
+assert.ok(html.includes('class="friction-workflow"'));
+assert.ok(html.includes('class="workflow-wires"'));
+for(const label of ['Requests','Data','Team input','Custom<br>Solution','Clearer workflows','Connected visibility']) assert.ok(html.includes(label));
+assert.equal((html.match(/class="friction-card"/g)||[]).length,3);
+assert.ok(js.includes("workflowObserver.observe(workflowGraphic)"));
+assert.ok(css.includes('.friction-workflow.is-in-view .workflow-wire-flow'));
+assert.ok(css.includes('@media(prefers-reduced-motion:reduce)'));
