@@ -1,92 +1,31 @@
-# Boost Mind — Visual Identity Rebuild v13
+# Boost Mind Technology — Custom Software Website v40
 
-This version is a full visual redesign. It keeps the project preview, Start a Project form, and Cloudflare email notification workflow, but replaces the previous visual identity and layout.
+Premium bilingual-friendly corporate software-solutions website (English UI). Built as static HTML, CSS and JS, with Cloudflare Pages `_worker.js` for inquiries
 
-## Run locally
-```powershell
+## What changed in v40
+
+- Removed Kemet and We Padel cards/assets
+- Added Stop Card, Incident Investigation, Action Tracker, 3D Process Simulation, 3D Process Safety Management (LSR & PSF), Technica Consult LMS, retained BowTie and CHEIRON HSE Dashboard
+- Kept MOC & Action Tracker, MCDC and Media Buyer projects, for a total of 11 project cards
+- Replaced the old service menu with an accessible tailored software explorer showing four realistic scenarios, rules, screens and workflow examples
+- Replaced generic orbit/process decoration with a five-stage interactive implementation blueprint
+- Added problem-to-solution and client outcome sections, with stronger messaging around bespoke software
+- Kept client logo marquee in its place immediately after Built around your workflow
+- Preserved mobile scroll animations, the desktop C4D engine, and disabled C4D entirely on mobile
+- No change to email notification/sending logic; existing Cloudflare environment variables are still required
+
+## Local usage
+
+```bash
 npm run dev
-```
-Open http://localhost:5173
-
-## Build for Cloudflare Pages
-```powershell
+npm run test:inquiry
+npm run test:site
 npm run build
+npm run preview
 ```
-Upload the contents of `dist/`.
 
-## Media policy
-This update includes the lightweight project screenshots and client logos so the design previews correctly. Large project videos are not duplicated. If the videos from the full-media master are copied into `public/projects/` using the existing filenames, the project modal automatically detects them and shows a **Play product demo** button.
+Cloudflare Pages build command: `npm run build`, output directory: `dist`
 
-## Brand
-The actual supplied Boost/BroadMind symbol is stored at `public/brand/boostmind-mark.webp` and is used throughout the site. The company name shown in the UI is **Boost Mind**.
+See `MEDIA_REUSE_NOTE.md` for demo video handling and `CLOUDFLARE_EMAIL_SETUP.md` for required Cloudflare Email Service configuration
 
-
-## v17 color direction
-See `V16_PALETTE.md`. The C4D animation is preserved; only the color system has been rebuilt.
-
-
-## v19 — Contact & Email Reliability
-- Added `info@boostmind-tech.com` to Contact, inquiry modal, and footer.
-- Uses `info@boostmind-tech.com` as the default Cloudflare Email sender.
-- Project inquiry notifications still go to `bishosamuel@gmail.com`.
-- Reply-To is the client email.
-- Added Email binding → REST API fallback.
-- Added `/api/health` email diagnostics.
-- Added `npm run test:inquiry` automated tests.
-
-## v21 performance update
-The Cinema 4D / WebGL layer is progressively loaded after first paint instead of blocking the page. Rendering is adaptive: lower DPR and FPS on mobile, tab-hidden pause, lighter geometry, lazy project/client images, and a lightweight branded fallback while WebGL initializes.
-
-
-## v23 Performance Turbo
-See `V23_PERFORMANCE_TURBO.md`.
-
-
-## v24 performance
-Adaptive WebGL scheduling, WebP assets, low-power rendering, modal pause, and reduced mobile effects.
-
-
-## v25 — Simple Start Project
-The inquiry form was reduced to name, email, phone/WhatsApp, project brief, and optional reference link. Frontend payload, Worker validation, and notification email were updated to match.
-
-
-## v26
-Humanized the visible copy and removed unnecessary sentence-ending dots across the website while preserving all v25 functionality
-
-
-## v27 production email fix
-Cloudflare Pages now sends project inquiry emails through the Cloudflare Email Service REST API. Add `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_EMAIL_API_TOKEN` to the production environment and redeploy. Check `/api/health` after deployment before testing the form.
-
-
-## v29
-- Removed the dark Clients panel background
-- Integrated the logo marquee into the normal light site background
-- Increased logo contrast and kept the automatic seamless slider
-- Preserved pause/play control, mobile behavior, reduced-motion fallback and email flow
-
-
-## v32
-- Moved the Trusted Companies logo slider directly after the What we build section
-- Updated navigation order to match the new page flow
-
-## v33 — Mobile Redesign
-The mobile UI (<=700px) was rebuilt to match the approved Boost Mind mobile concept while keeping desktop unchanged. Trusted Companies remains an automatic looping logo slider. See `V33_MOBILE_REDESIGN.md`.
-
-## v34
-- Mobile spacing repair removes duplicated C4D portal gaps
-- Mobile C4D renderer uses lower resolution and steadier frame pacing
-- C4D pauses behind the Clients logo marquee
-- Process mobile visual uses a lightweight branded composition instead of an empty reserved block
-
-## v35
-Mobile WebGL is disabled in favor of lightweight static 3D-style visuals, and all mobile panels use content-driven heights to eliminate dead space.
-
-## v37
-C4D/WebGL is desktop-only. Mobile never loads the animation engine and uses lightweight in-flow visuals instead.
-
-## v38
-- Added subtle staggered scroll reveal animations across the site
-- Mobile uses lightweight fade/rise motion with no WebGL changes
-
-## v39 — Services & Portfolio
-See `V39_PREMIUM_SERVICES_AND_PROJECTS.md` for the compact interactive service explorer, Clients section relocation and the BowTie Risk Analysis portfolio card. The existing CHEIRON Executive HSE Dashboard remains the HSE Dashboard project; no duplicate project card was created. The BowTie preview is illustrative and can be replaced with a real screenshot later.
+New project illustrations in `public/projects/*.svg` are original concept visuals, **not actual product screenshots**

@@ -2,16 +2,20 @@ const qs=(s,r=document)=>r.querySelector(s), qsa=(s,r=document)=>[...r.querySele
 const pauseC4D=()=>window.dispatchEvent(new Event('boostmind:c4d-pause'));
 const resumeC4D=()=>{if(!document.querySelector('dialog[open]'))window.dispatchEvent(new Event('boostmind:c4d-resume'))};
 const menu=qs('#mobile-menu'), toggle=qs('#boost-menu-toggle');
-toggle?.addEventListener('click',()=>{const open=menu.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open))});qsa('#mobile-menu a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+toggle?.addEventListener('click',()=>{const open=menu.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open))});qsa('#mobile-menu a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');toggle?.setAttribute('aria-expanded','false')}));
 
 const projects={
-cheiron:{category:'Enterprise HSE Intelligence',title:'CHEIRON Executive HSE Dashboard',description:'One place for HSE performance, trends and management reporting',image:'/projects/cheiron.webp',video:'/projects/cheiron.mp4',tags:['Executive dashboards','Incident analytics','Role-based access','Reporting']},
-bowtie:{category:'Process Safety · Risk Analysis',title:'BowTie Risk Analysis',description:'A visual way to explore threats, preventive barriers, the top event, and mitigation barriers around process-safety risks',image:'/projects/bowtie-risk-analysis.webp',video:null,tags:['BowTie diagrams','Threats & consequences','Preventive barriers','Mitigation barriers']},
-moc:{category:'Enterprise Workflow',title:'MOC & Action Tracker',description:'A clear workflow for approvals, actions, owners and deadlines',image:'/projects/moc-tracker.webp',video:'/projects/moc-tracker.mp4',tags:['Approvals','Action tracking','Deadlines','Operational workflow']},
-mcdc:{category:'Sports Platform',title:'MCDC Academy Platform',description:'A bilingual platform for academy operations, tournaments and results',image:'/projects/mcdc-academy.webp',video:'/projects/mcdc-academy.mp4',tags:['Arabic & English','Tournament management','Player stats','Admin tools']},
-kemit:{category:'Luxury Commerce',title:'Kemit Perfume Web App',description:'A premium bilingual storefront built around the perfume buying experience',image:'/projects/kemit-commerce.webp',video:'/projects/kemit-commerce.mp4',tags:['Premium UI','Bilingual','Commerce','Product catalog']},
-media:{category:'Marketing Analytics',title:'Media Buyer Analytics Studio',description:'A clearer view of ad spend, CAC, ROAS and customer performance',image:'/projects/media-buyer.webp',video:'/projects/media-buyer.mp4',tags:['Ad spend','CAC & ROAS','Customer analysis','Unit economics']},
-padel:{category:'Smart Automation',title:'We Padel Slot Watcher',description:'Automatic slot monitoring with filters and instant alerts',image:'/projects/we-padel.webp',video:'/projects/we-padel.mp4',tags:['Availability monitoring','Scheduling','Alerts','Filters']}
+  cheiron:{"category":"HSE & Executive Reporting","title":"CHEIRON Executive HSE Dashboard","description":"Executive dashboards that bring together your HSE objectives, incident information and operational indicators in the views your management team needs","image":"/projects/cheiron.webp","video":"/projects/cheiron.mp4","tags":["HSE dashboards","JV reporting","KPIs & trends","Role-based access"]},
+  stopcard:{"category":"HSE · Field Observations","title":"Stop Card · Safety Observations","description":"Mobile-first safety observations, HSE review, assignment to action parties, evidence and closure tracking in one tailored flow","image":"/projects/stop-card.svg","video":null,"tags":["Field observations","HSE review","Actions & evidence","Closure lifecycle"]},
+  incident:{"category":"HSE · Investigations","title":"Incident Investigation","description":"A structured investigation experience covering the incident record, evidence, root-cause review and corrective actions","image":"/projects/incident-investigation.svg","video":null,"tags":["Evidence","Investigation workflow","Corrective actions","Reports"]},
+  action:{"category":"Operations · Action Management","title":"Action Tracker","description":"A configurable action register that connects owners, priorities, due dates, updates and verification","image":"/projects/action-tracker.svg","video":null,"tags":["Owners & due dates","Follow-ups","Evidence","Status visibility"]},
+  psm:{"category":"Process Safety · Interactive Learning","title":"3D Process Safety Management","description":"Explore Life-Saving Rules and Process Safety Fundamentals through a visual, site-focused 3D experience","image":"/projects/3d-process-safety.svg","video":null,"tags":["Life-Saving Rules","PSF","Interactive 3D","Field awareness"]},
+  simulation:{"category":"Industrial · 3D Visualization","title":"3D Process Simulation","description":"An interactive 3D way to explore equipment layouts and illustrate how a process or facility operates","image":"/projects/3d-process-simulation.svg","video":null,"tags":["3D equipment","Process visualization","Interactive views","Operational context"]},
+  lms:{"category":"Learning · LMS","title":"Technica Consult LMS","description":"A learning platform designed around course structures, lessons, assessments, learner progress and admin workflows","image":"/projects/technica-lms.svg","video":null,"tags":["Courses & lessons","Assessments","Learner progress","Admin tools"]},
+  bowtie:{"category":"Process Safety · Risk Analysis","title":"BowTie Risk Analysis","description":"A visual way to connect threats and consequences with preventive and mitigating barriers around a top event","image":"/projects/bowtie-risk-analysis.webp","video":null,"tags":["Threats","Top event","Barriers","Consequences"]},
+  moc:{"category":"Operations · Change Management","title":"MOC & Action Tracker","description":"A configurable management-of-change workflow for approvals, action owners, target dates and tracking","image":"/projects/moc-tracker.webp","video":"/projects/moc-tracker.mp4","tags":["Management of change","Approvals","Ownership","Due dates"]},
+  media:{"category":"Analytics · Performance Reporting","title":"Media Buyer Analytics Studio","description":"Marketing analytics focused on the measures that matter to a team, including spend, customer acquisition and ROAS","image":"/projects/media-buyer.webp","video":"/projects/media-buyer.mp4","tags":["CAC & ROAS","Ad spend","Trends","Performance"]},
+  mcdc:{"category":"Learning · Academy Operations","title":"MCDC Academy Platform","description":"A bilingual solution for academy operations, player records, tournaments and results","image":"/projects/mcdc-academy.webp","video":"/projects/mcdc-academy.mp4","tags":["Arabic & English","Operations","Tournaments","Admin tools"]},
 };
 const pmodal=qs('#project-modal'),pimg=qs('#project-image'),pvideo=qs('#project-video'),play=qs('#play-demo');let activeProject=null,lastTrigger=null;
 async function videoExists(url){if(!url)return false;try{const r=await fetch(url,{method:'HEAD'});return r.ok}catch{return false}}
@@ -32,10 +36,12 @@ const motionReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').ma
 const revealGroups = [
   ['#home', ['.hero-kicker','.hero h1','.hero-copy>p','.hero-actions','.mobile-hero-signature','.hero-visual']],
   ['.statement', ['p','h2']],
-  ['#expertise', ['.section-head h2','.section-head>p','.solution-tab','.solution-panel']],
+  ['#expertise', ['.section-head h2','.head-sub','.tailor-tab','.tailor-panel','.tailor-ribbon']],
   ['#clients', ['.clients-heading h2','.logo-marquee']],
-  ['#work', ['.work-head h2','.work-head>p','.project']],
-  ['#process', ['.process-visual','.process-content>h2','.process-content>p','.process-list article']],
+  ['#challenges', ['.friction-head h2','.friction-head>p','.friction-card']],
+  ['#work', ['.work-head h2','.work-head .head-sub','.portfolio-filters','.project']],
+  ['#process', ['.approach-heading h2','.approach-heading>p','.approach-step','.approach-preview','.tailor-proof']],
+  ['#outcomes', ['.outcomes-head h2','.outcomes-grid>div']],
   ['#contact', ['.cta-copy>span','.cta-copy>h2','.contact-actions']],
   ['footer', ['.footer-brand-full','p','.footer-email','span']]
 ];
@@ -70,16 +76,33 @@ if(motionReduced || !('IntersectionObserver' in window)){
 }
 
 
-const processSection=qs('#process'),processVisual=qs('.process-visual',processSection),processSteps=qsa('.process-list article',processSection);
-if(processVisual&&processSteps.length){
-  const setActiveStep=index=>{processSteps.forEach((step,i)=>step.classList.toggle('active',i===index));processVisual.dataset.activeStep=String(index+1)};
-  setActiveStep(0);
-  const processObserver=new IntersectionObserver(entries=>{const visible=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(!visible)return;const idx=processSteps.indexOf(visible.target);if(idx!==-1)setActiveStep(idx)},{threshold:[.35,.55,.75],rootMargin:'-12% 0px -12% 0px'});
-  processSteps.forEach((step,index)=>{processObserver.observe(step);step.addEventListener('mouseenter',()=>setActiveStep(index));step.addEventListener('focusin',()=>setActiveStep(index))});
-  processSection?.addEventListener('pointermove',e=>{const rect=processSection.getBoundingClientRect();const x=((e.clientX-rect.left)/rect.width-.5);const y=((e.clientY-rect.top)/rect.height-.5);processVisual.style.transform=`translate3d(${(x*10).toFixed(1)}px, ${(y*8).toFixed(1)}px, 0)`});
-  processSection?.addEventListener('pointerleave',()=>{processVisual.style.transform='translate3d(0,0,0)'});
+// v40 — interactive, accessible approach blueprint. No WebGL or background loops.
+const approachData={
+  discover:{index:'01 / 05',kicker:'DISCOVERY',title:'Start with your operation, not a template',description:'We learn how work moves between your people, where it gets stuck and what a useful system must do',steps:[['Your people','Roles and access'],['Your process','Steps and exceptions'],['Your system','Designed to fit']],result:'A shared picture of the problem we’re solving'},
+  map:{index:'02 / 05',kicker:'WORKFLOW MAPPING',title:'Translate the real flow into clear logic',description:'We map forms, conditional approvals, handovers, alerts and exceptions before building',steps:[['Input','Fields and triggers'],['Rules','Approvals and routing'],['Output','Actions and records']],result:'A clear map of how your system should work'},
+  shape:{index:'03 / 05',kicker:'EXPERIENCE DESIGN',title:'Give each role the screen they need',description:'We shape the pages, mobile flows, permissions and terminology around actual users',steps:[['User','Their daily task'],['Interface','Only what matters'],['Access','Right permissions']],result:'A design the team can review before development'},
+  build:{index:'04 / 05',kicker:'BUILD & VALIDATE',title:'Build it, test real cases, refine it',description:'We develop and check each workflow against practical scenarios, including returns and exceptions',steps:[['Build','Working modules'],['Review','Real test cases'],['Refine','Feedback applied']],result:'A working product checked against the requirements'},
+  evolve:{index:'05 / 05',kicker:'LAUNCH & EVOLVE',title:'Go live with room to change',description:'We prepare the handover, support adoption and make room for new requirements as the operation grows',steps:[['Launch','Go-live support'],['Learn','User feedback'],['Grow','New needs']],result:'A system that can evolve with the business'}
+};
+const approachButtons=qsa('.approach-step');
+function activateApproach(key){
+  const data=approachData[key];if(!data)return;
+  approachButtons.forEach(b=>{const active=b.dataset.phase===key;b.classList.toggle('is-active',active);b.setAttribute('aria-pressed',String(active))});
+  const fields={'#approach-index':data.index,'#approach-kicker':data.kicker,'#approach-title':data.title,'#approach-desc':data.description,'#approach-result':data.result};
+  Object.entries(fields).forEach(([sel,val])=>{const el=qs(sel);if(el)el.textContent=val});
+  data.steps.forEach(([title,sub],i)=>{const n=i+1;qs('#approach-node-'+n).textContent=title;qs('#approach-sub-'+n).textContent=sub});
+  const panel=qs('#approach-preview');panel?.classList.remove('approach-swap');
+  if(!motionReduced&&panel){void panel.offsetWidth;panel.classList.add('approach-swap')}
 }
+approachButtons.forEach(btn=>btn.addEventListener('click',()=>activateApproach(btn.dataset.phase)));
 
+// Portfolio filters: all systems remain available in the DOM and project popup.
+const portfolioFilters=qsa('.portfolio-filter'),portfolioCards=qsa('.projects-v40 .project');
+portfolioFilters.forEach(button=>button.addEventListener('click',()=>{
+  const group=button.dataset.filter;
+  portfolioFilters.forEach(b=>{const active=b===button;b.classList.toggle('is-active',active);b.setAttribute('aria-pressed',String(active))});
+  portfolioCards.forEach(card=>{card.hidden=!(group==='all'||card.dataset.category===group)});
+}));
 
 // v37: C4D is desktop-only. Mobile never loads or keeps the WebGL compositor.
 const desktopC4DEnabled = document.documentElement.getAttribute('data-desktop-c4d') === '1';
@@ -169,42 +192,31 @@ if(clientsSection){
   clientsVisualObserver.observe(clientsSection);
 }
 
-// v39 — useful, accessible capability explorer, independent from WebGL.
-const serviceExamples={
-  platforms:{number:'01',title:'Workflows that actually move',description:'One clear place to track requests, approvals and ownership across your team',steps:[['Request','Capture the details'],['Approve','Route to the right person'],['Track','See what’s done']],benefit:'Clear ownership, fewer missed actions',footer:'Built to fit your team, not the other way around'},
-  dashboards:{number:'02',title:'A clearer picture, every day',description:'Turn everyday data into an easy view of trends, performance and the next action',steps:[['Connect','Bring in your data'],['Measure','Find the signals'],['Decide','Share the insight']],benefit:'Answers your team can act on',footer:'The right numbers, without the clutter'},
-  automation:{number:'03',title:'Less chasing, more doing',description:'Automate routine handoffs, reminders and approvals without losing control',steps:[['Trigger','A request comes in'],['Route','Notify the owner'],['Complete','Close the loop']],benefit:'Fewer repetitive follow-ups',footer:'Keep the process moving automatically'},
-  apis:{number:'04',title:'Your tools, connected',description:'Connect existing systems so the same information does not have to be entered twice',steps:[['Source','Read the data'],['Connect','Map the systems'],['Sync','Keep it updated']],benefit:'More consistent data across tools',footer:'One connected workflow, not isolated apps'},
-  web:{number:'05',title:'An easier way to get things done',description:'Give your team or customers a focused app that works beautifully on any screen',steps:[['Explore','Find what matters'],['Interact','Finish the task'],['Manage','Stay in control']],benefit:'A simpler experience for everyone',footer:'Built around the person using it'},
-  monitoring:{number:'06',title:'Spot changes earlier',description:'Track important signals and alert the right person when attention is needed',steps:[['Watch','Track the signal'],['Detect','Match the rules'],['Alert','Reach the owner']],benefit:'Timely alerts and clearer follow-up',footer:'Know what changed and what to do next'}
+// v40 — illustrative solution scenarios make the customization possibilities concrete.
+const tailorData={
+  operations:{index:'01 / 04',title:'Your approvals, your way',intro:'A request can follow your exact roles, conditions and sign-off rules — not somebody else’s process',steps:[['Submit request','Your form fields'],['Review & approve','Your approval matrix'],['Close & report','Your reporting rules']],features:['Forms & fields','Approval levels','Roles & access','Notifications'],benefit:'No fixed approval chain — the logic follows your operation'},
+  safety:{index:'02 / 04',title:'Safety processes that match your site',intro:'Connect observations, incident reviews and action follow-up in a flow defined by your HSE team',steps:[['Record event','Your categories'],['Assign action','Your responsibilities'],['Verify & close','Your evidence rules']],features:['HSE categories','Incident stages','Evidence','Audit history'],benefit:'Your safety rules and responsibilities stay visible end to end'},
+  learning:{index:'03 / 04',title:'Learning built around your courses',intro:'Organize content, practice and exams according to how your learners and administrators work',steps:[['Build course','Your structure'],['Learn & practice','Your assessments'],['Track progress','Your reports']],features:['Course structure','Quiz logic','Roles','Subscriptions'],benefit:'The learning journey follows your training program'},
+  data:{index:'04 / 04',title:'The data your team needs, connected',intro:'Bring existing information into dashboards and alerts built around your own reporting questions',steps:[['Connect source','Your systems'],['Apply rules','Your metrics'],['Act on insight','Your alerts']],features:['API integrations','Custom KPIs','Dashboards','Notifications'],benefit:'Decisions based on the measures that matter to your business'}
 };
-const serviceTabs=qsa('.solution-tab');
-const servicePanel=qs('#solution-panel');
-function activateService(key, focus=false){
-  const data=serviceExamples[key]; if(!data||!servicePanel)return;
-  const activeTab=serviceTabs.find(t=>t.dataset.service===key);
-  serviceTabs.forEach(t=>{const active=t===activeTab;t.classList.toggle('is-active',active);t.setAttribute('aria-selected',String(active));t.tabIndex=active?0:-1});
-  servicePanel.setAttribute('aria-labelledby',activeTab.id);
-  const fields={
-    '#solution-index':`${data.number} / 06`, '#solution-title':data.title,
-    '#solution-description':data.description,'#solution-benefit':data.benefit,
-    '#solution-footer':data.footer,
-  };
-  Object.entries(fields).forEach(([id,val])=>{const el=qs(id);if(el)el.textContent=val});
-  data.steps.forEach(([title,caption],i)=>{
-    const n=i+1;qs(`#solution-step-${n}`).textContent=title;
-    qs(`#solution-step-caption-${n}`).textContent=caption;
-  });
-  servicePanel.classList.remove('solution-swapped');
-  // Force animation restart only when motion is permitted.
-  if(!motionReduced){void servicePanel.offsetWidth;servicePanel.classList.add('solution-swapped')}
+const tailorTabs=qsa('.tailor-tab');
+const tailorPanel=qs('#tailor-panel');
+function activateTailor(key,focus=false){
+  const info=tailorData[key];if(!info||!tailorPanel)return;
+  const activeTab=tailorTabs.find(tab=>tab.dataset.tailor===key);
+  tailorTabs.forEach(tab=>{const active=tab===activeTab;tab.classList.toggle('is-active',active);tab.setAttribute('aria-selected',String(active));tab.tabIndex=active?0:-1});
+  tailorPanel.setAttribute('aria-labelledby',activeTab.id);
+  [['#tailor-count',info.index],['#tailor-title',info.title],['#tailor-intro',info.intro],['#tailor-benefit',info.benefit]].forEach(([sel,value])=>{const el=qs(sel);if(el)el.textContent=value});
+  info.steps.forEach(([title,sub],i)=>{const n=i+1;qs('#tailor-step-'+n).textContent=title;qs('#tailor-step-sub-'+n).textContent=sub});
+  const feats=qs('#tailor-features');if(feats)feats.replaceChildren(...info.features.map(label=>{const el=document.createElement('span');el.textContent=label;return el}));
+  tailorPanel.classList.remove('tailor-swap');if(!motionReduced){void tailorPanel.offsetWidth;tailorPanel.classList.add('tailor-swap')}
   if(focus)activeTab.focus();
 }
-serviceTabs.forEach((tab,index)=>{
-  tab.addEventListener('click',()=>activateService(tab.dataset.service));
+tailorTabs.forEach((tab,i)=>{
+  tab.addEventListener('click',()=>activateTailor(tab.dataset.tailor));
   tab.addEventListener('keydown',e=>{
-    const direction=(e.key==='ArrowRight'||e.key==='ArrowDown')?1:(e.key==='ArrowLeft'||e.key==='ArrowUp')?-1:0;
-    if(direction){e.preventDefault();const next=serviceTabs[(index+direction+serviceTabs.length)%serviceTabs.length];activateService(next.dataset.service,true)}
-    if(e.key==='Home'||e.key==='End'){e.preventDefault();const next=serviceTabs[e.key==='Home'?0:serviceTabs.length-1];activateService(next.dataset.service,true)}
+    const delta=(e.key==='ArrowDown'||e.key==='ArrowRight')?1:(e.key==='ArrowUp'||e.key==='ArrowLeft')?-1:0;
+    if(delta){e.preventDefault();const next=tailorTabs[(i+delta+tailorTabs.length)%tailorTabs.length];activateTailor(next.dataset.tailor,true)}
+    if(e.key==='Home'||e.key==='End'){e.preventDefault();const next=tailorTabs[e.key==='Home'?0:tailorTabs.length-1];activateTailor(next.dataset.tailor,true)}
   });
 });

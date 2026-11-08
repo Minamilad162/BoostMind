@@ -1,7 +1,7 @@
 {
-  "name": "boost-mind-premium-services-v39",
+  "name": "boost-mind-custom-solutions-v40",
   "private": true,
-  "version": "39.0.0",
+  "version": "40.0.0",
   "type": "module",
   "engines": {
     "node": ">=20"
@@ -10,6 +10,7 @@
     "dev": "node server.mjs",
     "build": "node build.mjs",
     "preview": "node server.mjs --dist",
-    "test:inquiry": "node tests/inquiry-worker.test.mjs"
+    "test:inquiry": "node tests/inquiry-worker.test.mjs",
+    "test:site": "node tests/site-content.test.mjs"
   }
 }

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#F7F9FC" />
-  <meta name="description" content="Boost Mind builds business software, dashboards, automation and digital products" />
+  <meta name="description" content="Boost Mind designs and builds tailored software solutions around each client’s workflows, people and requirements" />
   <link rel="icon" href="/favicon.png" />
   <link rel="preload" as="image" href="/brand/boostmind-logo.webp" fetchpriority="high" />
   <link rel="preload" as="image" href="/brand/boostmind-mark.webp" />
@@ -27,8 +27,8 @@
     html:not([data-desktop-c4d="1"]) .mobile-scene-portal,
     html:not([data-desktop-c4d="1"]) .c4d-mobile-anchor{display:none!important}
   </style>
-  <link rel="stylesheet" href="/src/style.css?v=39" />
-  <title>Boost Mind — Custom Software & Automation</title>
+  <link rel="stylesheet" href="/src/style.css?v=40" />
+  <title>Boost Mind — Software Tailored to Your Business</title>
 </head>
 <body>
   <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
@@ -37,12 +37,12 @@
       <img src="/brand/boostmind-logo.webp" alt="Boost Mind Technology" width="900" height="236" decoding="async" fetchpriority="high" />
     </a>
     <nav class="nav-links" aria-label="Primary navigation">
-      <a href="#clients">Clients</a><a href="#expertise">Expertise</a><a href="#work">Work</a><a href="#process">Process</a><a href="#contact">Contact</a>
+      <a href="#clients">Clients</a><a href="#expertise">Solutions</a><a href="#work">Our Work</a><a href="#process">Our Approach</a><a href="#contact">Contact</a>
     </nav>
     <button class="nav-cta" type="button" data-open-inquiry>Start a project <span>↗</span></button>
     <button class="menu-toggle" id="boost-menu-toggle" aria-label="Open menu" aria-expanded="false"><i></i><i></i></button>
   </header>
-  <nav class="mobile-menu" id="mobile-menu"><a href="#clients">Clients</a><a href="#expertise">Expertise</a><a href="#work">Work</a><a href="#process">Process</a><a href="#contact">Contact</a><button data-open-inquiry>Start a project ↗</button></nav>
+  <nav class="mobile-menu" id="mobile-menu"><a href="#clients">Clients</a><a href="#expertise">Solutions</a><a href="#work">Our Work</a><a href="#process">Our Approach</a><a href="#contact">Contact</a><button data-open-inquiry>Start a project ↗</button></nav>
 
   <div class="c4d-stage" id="visual-stage" aria-hidden="true"><canvas id="webgl-canvas"></canvas></div>
 
@@ -50,8 +50,8 @@
     <section class="hero panel" id="home" data-scene="0"><div class="panel-inner c4d-mobile-anchor" aria-hidden="true"></div>
       <div class="hero-copy">
         <div class="hero-kicker"><span></span> Software · Automation · Analytics</div>
-        <h1>Software that <em>fits the way you work</em></h1>
-        <p>We build practical software around the way your team actually works</p>
+        <h1>Software built <em>around your business</em></h1>
+        <p>Your team, your process, your requirements — we build the software to fit</p>
         <div class="hero-actions"><a class="btn primary" href="#work">View our work <span>↗</span></a><button class="btn secondary" type="button" data-open-inquiry>Start a project</button></div>
         <div class="mobile-hero-signature">Build smarter <i>•</i> Connect better <i>•</i> Automate more</div>
       </div>
@@ -65,7 +65,7 @@
       </div>
     </section>
 
-    <section class="statement strip"><p>Built around your workflow</p><h2>Build smarter · Connect better · Automate more</h2></section>
+    <section class="statement strip"><p>Built around your workflow</p><h2>No rigid templates — software shaped around the way you work</h2></section>
 
     <section class="section clients" id="clients">
       <div class="clients-heading">
@@ -79,75 +79,91 @@
       </div>
     </section>
 
-<section class="section expertise panel" id="expertise" data-scene="1"><div class="panel-inner c4d-mobile-anchor" aria-hidden="true"></div>
-      <div class="section-head"><div><h2>What we <em>build</em></h2></div><p>Practical software for real work</p></div>
-      <div class="solution-explorer" id="solution-explorer">
-        <div class="solution-menu" role="tablist" aria-label="Explore software services" aria-orientation="vertical">
-          <button type="button" class="solution-tab is-active" role="tab" id="service-tab-platforms" aria-selected="true" aria-controls="solution-panel" tabindex="0" data-service="platforms"><span class="solution-tab-icon">▦</span><span class="solution-tab-copy"><b>Business Platforms</b><small>Put everyday work in one place</small></span><span class="solution-tab-arrow" aria-hidden="true">↗</span></button>
-          <button type="button" class="solution-tab" role="tab" id="service-tab-dashboards" aria-selected="false" aria-controls="solution-panel" tabindex="-1" data-service="dashboards"><span class="solution-tab-icon">▥</span><span class="solution-tab-copy"><b>Dashboards & BI</b><small>See the numbers that matter</small></span><span class="solution-tab-arrow" aria-hidden="true">↗</span></button>
-          <button type="button" class="solution-tab" role="tab" id="service-tab-automation" aria-selected="false" aria-controls="solution-panel" tabindex="-1" data-service="automation"><span class="solution-tab-icon">⟳</span><span class="solution-tab-copy"><b>Workflow Automation</b><small>Move work forward automatically</small></span><span class="solution-tab-arrow" aria-hidden="true">↗</span></button>
-          <button type="button" class="solution-tab" role="tab" id="service-tab-apis" aria-selected="false" aria-controls="solution-panel" tabindex="-1" data-service="apis"><span class="solution-tab-icon">↔</span><span class="solution-tab-copy"><b>APIs & Integrations</b><small>Get your tools talking</small></span><span class="solution-tab-arrow" aria-hidden="true">↗</span></button>
-          <button type="button" class="solution-tab" role="tab" id="service-tab-web" aria-selected="false" aria-controls="solution-panel" tabindex="-1" data-service="web"><span class="solution-tab-icon">◫</span><span class="solution-tab-copy"><b>Web Apps & Portals</b><small>Simple experiences people use</small></span><span class="solution-tab-arrow" aria-hidden="true">↗</span></button>
-          <button type="button" class="solution-tab" role="tab" id="service-tab-monitoring" aria-selected="false" aria-controls="solution-panel" tabindex="-1" data-service="monitoring"><span class="solution-tab-icon">◎</span><span class="solution-tab-copy"><b>Monitoring & Alerts</b><small>Know when something changes</small></span><span class="solution-tab-arrow" aria-hidden="true">↗</span></button>
+<section class="section expertise panel tailored-solutions" id="expertise" data-scene="1"><div class="panel-inner c4d-mobile-anchor" aria-hidden="true"></div>
+      <div class="section-head"><div><h2>Built for <em>your way of working</em></h2><p class="head-sub">Choose the kind of work you do — see what can be tailored</p></div><span class="head-aside">Not another software package with a fixed workflow</span></div>
+      <div class="tailor-explorer" id="tailor-explorer">
+        <div class="tailor-selector" role="tablist" aria-label="Explore tailored solutions">
+          <button class="tailor-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="tailor-panel" id="tailor-tab-operations" data-tailor="operations"><span class="tailor-icon">↗</span><span><b>Operations & approvals</b><small>Routes, owners, deadlines</small></span><i>01</i></button>
+          <button class="tailor-tab" type="button" role="tab" aria-selected="false" aria-controls="tailor-panel" id="tailor-tab-safety" data-tailor="safety" tabindex="-1"><span class="tailor-icon">◎</span><span><b>HSE & process safety</b><small>Observations, incidents, barriers</small></span><i>02</i></button>
+          <button class="tailor-tab" type="button" role="tab" aria-selected="false" aria-controls="tailor-panel" id="tailor-tab-learning" data-tailor="learning" tabindex="-1"><span class="tailor-icon">▦</span><span><b>Learning & compliance</b><small>Lessons, exams, progress</small></span><i>03</i></button>
+          <button class="tailor-tab" type="button" role="tab" aria-selected="false" aria-controls="tailor-panel" id="tailor-tab-data" data-tailor="data" tabindex="-1"><span class="tailor-icon">▤</span><span><b>Insights & integrations</b><small>Dashboards, APIs, alerts</small></span><i>04</i></button>
         </div>
-        <div class="solution-panel" id="solution-panel" role="tabpanel" aria-labelledby="service-tab-platforms" tabindex="0" aria-live="polite">
-          <div class="solution-panel-top"><span class="solution-live"><i></i> Example workflow</span><span class="solution-panel-index" id="solution-index">01 / 06</span></div>
-          <h3 id="solution-title">Workflows that actually move</h3>
-          <p id="solution-description">One clear place to track requests, approvals and ownership across your team</p>
-          <div class="solution-flow" aria-label="Example workflow steps">
-            <div class="solution-step"><span>01</span><b id="solution-step-1">Request</b><small id="solution-step-caption-1">Capture the details</small></div>
-            <span class="solution-connector" aria-hidden="true"><i></i>→</span>
-            <div class="solution-step"><span>02</span><b id="solution-step-2">Approve</b><small id="solution-step-caption-2">Route to the right person</small></div>
-            <span class="solution-connector" aria-hidden="true"><i></i>→</span>
-            <div class="solution-step"><span>03</span><b id="solution-step-3">Track</b><small id="solution-step-caption-3">See what's done</small></div>
+        <div class="tailor-panel" id="tailor-panel" role="tabpanel" aria-labelledby="tailor-tab-operations" tabindex="0">
+          <div class="tailor-panel-top"><span class="tailor-live"><i></i> LIVE SOLUTION EXAMPLE</span><span class="tailor-count" id="tailor-count">01 / 04</span></div>
+          <h3 id="tailor-title">Your approvals, your way</h3>
+          <p id="tailor-intro">A request can follow your exact roles, conditions and sign-off rules — not somebody else’s process</p>
+          <div class="tailor-demo" aria-label="Example of a tailored workflow">
+            <div class="tailor-demo-head"><span>WORKFLOW DESIGN</span><span class="tailor-demo-indicator"><i></i> Configured for your team</span></div>
+            <div class="tailor-flow" id="tailor-flow"><div class="tailor-node"><span>01</span><b id="tailor-step-1">Submit request</b><small id="tailor-step-sub-1">Your form fields</small></div><div class="tailor-flow-link" aria-hidden="true"></div><div class="tailor-node"><span>02</span><b id="tailor-step-2">Review & approve</b><small id="tailor-step-sub-2">Your approval matrix</small></div><div class="tailor-flow-link" aria-hidden="true"></div><div class="tailor-node"><span>03</span><b id="tailor-step-3">Close & report</b><small id="tailor-step-sub-3">Your reporting rules</small></div></div>
+            <div class="tailor-config"><span>TAILORED COMPONENTS</span><div id="tailor-features" class="tailor-features"><span>Forms & fields</span><span>Approval levels</span><span>Roles & access</span><span>Notifications</span></div></div>
           </div>
-          <div class="solution-outcome"><span class="solution-outcome-icon" aria-hidden="true">✓</span><div><small>WHAT YOU GET</small><strong id="solution-benefit">Clear ownership, fewer missed actions</strong></div></div>
-          <div class="solution-bottom"><span id="solution-footer">Built to fit your team, not the other way around</span><button type="button" data-open-inquiry>Discuss your idea <span aria-hidden="true">↗</span></button></div>
+          <div class="tailor-bottom"><span id="tailor-benefit">No fixed approval chain — the logic follows your operation</span><button type="button" data-open-inquiry>Talk about your workflow <b>↗</b></button></div>
         </div>
       </div>
+      <div class="tailor-ribbon"><span>WHAT WE CAN CUSTOMIZE</span><div><span>Forms & fields</span><span>Roles & access</span><span>Approval logic</span><span>Dashboards</span><span>Alerts</span><span>Integrations</span><span>Terminology</span><span>Mobile flows</span></div></div>
     </section>
 
-    <section class="section work panel" id="work" data-scene="2"><div class="panel-inner c4d-mobile-anchor" aria-hidden="true"></div>
-      <div class="section-head work-head"><div><h2>A few things we’ve <em>built</em></h2></div><p>Open any project for a closer look</p></div>
-      <div class="projects-grid">
-        <button class="project project-featured" data-project="cheiron"><img loading="lazy" decoding="async" src="/projects/cheiron.webp" alt="CHEIRON Executive HSE Dashboard"><div class="project-overlay"></div><div class="project-top"><span>Enterprise HSE</span><i>View project ↗</i></div><div class="project-copy"><h3>CHEIRON Executive HSE Dashboard</h3><p>One place for HSE performance, trends and management reporting</p></div></button>
-        <button class="project project-bowtie" data-project="bowtie"><img loading="lazy" decoding="async" src="/projects/bowtie-risk-analysis.webp" alt="BowTie Risk Analysis workflow preview"><div class="project-overlay"></div><div class="project-top"><span>Risk Analysis</span><i>View project ↗</i></div><div class="project-copy"><h3>BowTie Risk Analysis</h3><p>Visualize threats, barriers and consequences in one clear view</p></div></button>
-        <button class="project" data-project="moc"><img loading="lazy" decoding="async" src="/projects/moc-tracker.webp" alt="MOC and Action Tracker"><div class="project-overlay"></div><div class="project-top"><span>Workflow</span><i>View ↗</i></div><div class="project-copy"><h3>MOC & Action Tracker</h3><p>A clear workflow for approvals, actions, owners and deadlines</p></div></button>
-        <button class="project" data-project="mcdc"><img loading="lazy" decoding="async" src="/projects/mcdc-academy.webp" alt="MCDC Academy Platform"><div class="project-overlay"></div><div class="project-top"><span>Sports Platform</span><i>View ↗</i></div><div class="project-copy"><h3>MCDC Academy Platform</h3><p>A bilingual platform for academy operations, tournaments and results</p></div></button>
-        <button class="project" data-project="kemit"><img loading="lazy" decoding="async" src="/projects/kemit-commerce.webp" alt="Kemit Perfume Web App"><div class="project-overlay"></div><div class="project-top"><span>Commerce</span><i>View ↗</i></div><div class="project-copy"><h3>Kemit Perfume Web App</h3><p>A premium bilingual storefront built around the perfume buying experience</p></div></button>
-        <button class="project" data-project="media"><img loading="lazy" decoding="async" src="/projects/media-buyer.webp" alt="Media Buyer Analytics Studio"><div class="project-overlay"></div><div class="project-top"><span>Analytics</span><i>View ↗</i></div><div class="project-copy"><h3>Media Buyer Analytics Studio</h3><p>A clearer view of ad spend, CAC, ROAS and customer performance</p></div></button>
-        <button class="project" data-project="padel"><img loading="lazy" decoding="async" src="/projects/we-padel.webp" alt="We Padel Slot Watcher"><div class="project-overlay"></div><div class="project-top"><span>Automation</span><i>View ↗</i></div><div class="project-copy"><h3>We Padel Slot Watcher</h3><p>Automatic slot monitoring with filters and instant alerts</p></div></button>
+    <section class="section friction-section" id="challenges" aria-labelledby="friction-heading">
+      <div class="section-head friction-head"><div><h2 id="friction-heading">The problem comes first <em>Not the software</em></h2></div><p>We design around the everyday friction your team knows best</p></div>
+      <div class="friction-grid">
+        <article class="friction-card"><div class="friction-symbol">↗</div><span class="friction-label">SLOW APPROVALS</span><h3>Too many follow-ups</h3><p>Requests get stuck between inboxes and nobody knows who owns the next step</p><div class="friction-fix"><b>WHAT WE BUILD</b><span>Clear approval paths, owners and reminders</span></div></article>
+        <article class="friction-card"><div class="friction-symbol">▦</div><span class="friction-label">SCATTERED INFORMATION</span><h3>Data in too many places</h3><p>Teams keep re-entering information across files, forms and disconnected tools</p><div class="friction-fix"><b>WHAT WE BUILD</b><span>Connected forms, records and system integrations</span></div></article>
+        <article class="friction-card"><div class="friction-symbol">◉</div><span class="friction-label">MISSING VISIBILITY</span><h3>No clear picture</h3><p>Reporting is slow, action status is unclear and deadlines are easy to miss</p><div class="friction-fix"><b>WHAT WE BUILD</b><span>Live dashboards, action tracking and useful alerts</span></div></article>
       </div>
+      <div class="friction-bottom"><span>Every business works differently</span><strong>That’s where custom software makes the difference</strong></div>
     </section>
 
-    <section class="section process panel" id="process" data-scene="3"><div class="panel-inner c4d-mobile-anchor" aria-hidden="true"></div>
-      <div class="process-visual" aria-hidden="true">
-        <div class="process-grid"></div>
-        <div class="process-glow"></div>
-        <div class="process-orbit orbit-one"></div>
-        <div class="process-orbit orbit-two"></div>
-        <div class="process-orbit orbit-three"></div>
-        <div class="process-beam beam-one"></div>
-        <div class="process-beam beam-two"></div>
-        <div class="process-particle particle-a"></div>
-        <div class="process-particle particle-b"></div>
-        <div class="process-particle particle-c"></div>
-        <div class="process-badge badge-a"><span>01</span> Scope</div>
-        <div class="process-badge badge-b"><span>02</span> Design</div>
-        <div class="process-badge badge-c"><span>03</span> Build</div>
-        <div class="process-badge badge-d"><span>04</span> Launch</div>
+    <section class="section work panel work-v40" id="work" data-scene="2"><div class="panel-inner c4d-mobile-anchor" aria-hidden="true"></div>
+      <div class="section-head work-head"><div><h2>Made for <em>real teams</em></h2><p class="head-sub">A selection of systems we've built around different operational needs</p></div><span class="head-aside">The same idea, never the same implementation</span></div>
+      <div class="portfolio-filters" role="group" aria-label="Filter projects">
+        <button type="button" class="portfolio-filter is-active" data-filter="all" aria-pressed="true">All systems <span id="portfolio-count">11</span></button>
+        <button type="button" class="portfolio-filter" data-filter="safety" aria-pressed="false">HSE & Safety</button>
+        <button type="button" class="portfolio-filter" data-filter="operations" aria-pressed="false">Operations</button>
+        <button type="button" class="portfolio-filter" data-filter="simulation" aria-pressed="false">3D & Simulation</button>
+        <button type="button" class="portfolio-filter" data-filter="learning" aria-pressed="false">Learning</button>
+        <button type="button" class="portfolio-filter" data-filter="analytics" aria-pressed="false">Analytics</button>
       </div>
-      <div class="process-content"><h2>From idea to <em>launch</em></h2><p>Clear steps, close collaboration</p>
-        <div class="process-list"><article data-step="1"><b>01</b><div><h3>Understand</h3><p>Get clear on the problem</p></div></article><article data-step="2"><b>02</b><div><h3>Design</h3><p>Shape how it should work</p></div></article><article data-step="3"><b>03</b><div><h3>Engineer</h3><p>Build and test the product</p></div></article><article data-step="4"><b>04</b><div><h3>Evolve</h3><p>Launch, learn and improve</p></div></article></div>
-      </div>
+      <div class="projects-grid projects-v40" id="project-grid">
+        <button class="project project-custom project-featured" type="button" data-project="cheiron" data-category="safety" aria-label="Explore CHEIRON Executive HSE Dashboard"><img loading="lazy" decoding="async" src="/projects/cheiron.webp" alt="CHEIRON Executive HSE Dashboard preview"><div class="project-overlay"></div><div class="project-top"><span>HSE &amp; Safety</span><i>Explore ↗</i></div><div class="project-copy"><h3>CHEIRON Executive HSE Dashboard</h3><p>HSE reporting shaped around your KPIs, roles and management views</p></div></button>
+        <button class="project project-custom" type="button" data-project="stopcard" data-category="safety" aria-label="Explore Stop Card · Safety Observations"><img loading="lazy" decoding="async" src="/projects/stop-card.svg" alt="Stop Card · Safety Observations preview"><div class="project-overlay"></div><div class="project-top"><span>HSE &amp; Safety</span><i>Explore ↗</i></div><div class="project-copy"><h3>Stop Card · Safety Observations</h3><p>Capture field observations, route actions and follow closure from one workflow</p></div></button>
+        <button class="project project-custom" type="button" data-project="incident" data-category="safety" aria-label="Explore Incident Investigation"><img loading="lazy" decoding="async" src="/projects/incident-investigation.svg" alt="Incident Investigation preview"><div class="project-overlay"></div><div class="project-top"><span>HSE &amp; Safety</span><i>Explore ↗</i></div><div class="project-copy"><h3>Incident Investigation</h3><p>A structured investigation flow with evidence, review and corrective actions</p></div></button>
+        <button class="project project-custom" type="button" data-project="action" data-category="operations" aria-label="Explore Action Tracker"><img loading="lazy" decoding="async" src="/projects/action-tracker.svg" alt="Action Tracker preview"><div class="project-overlay"></div><div class="project-top"><span>Operations</span><i>Explore ↗</i></div><div class="project-copy"><h3>Action Tracker</h3><p>Give every action an owner, due date, evidence and clear status</p></div></button>
+        <button class="project project-custom" type="button" data-project="psm" data-category="safety" aria-label="Explore 3D Process Safety Management"><img loading="lazy" decoding="async" src="/projects/3d-process-safety.svg" alt="3D Process Safety Management preview"><div class="project-overlay"></div><div class="project-top"><span>HSE &amp; Safety</span><i>Explore ↗</i></div><div class="project-copy"><h3>3D Process Safety Management</h3><p>Explore Life-Saving Rules and Process Safety Fundamentals in a visual 3D experience</p></div></button>
+        <button class="project project-custom" type="button" data-project="simulation" data-category="simulation" aria-label="Explore 3D Process Simulation"><img loading="lazy" decoding="async" src="/projects/3d-process-simulation.svg" alt="3D Process Simulation preview"><div class="project-overlay"></div><div class="project-top"><span>3D &amp; Simulation</span><i>Explore ↗</i></div><div class="project-copy"><h3>3D Process Simulation</h3><p>An interactive 3D view of equipment and operational processes</p></div></button>
+        <button class="project project-custom" type="button" data-project="lms" data-category="learning" aria-label="Explore Technica Consult LMS"><img loading="lazy" decoding="async" src="/projects/technica-lms.svg" alt="Technica Consult LMS preview"><div class="project-overlay"></div><div class="project-top"><span>Learning &amp; Platforms</span><i>Explore ↗</i></div><div class="project-copy"><h3>Technica Consult LMS</h3><p>A tailored course, lesson, quiz and learner-progress experience</p></div></button>
+        <button class="project project-custom" type="button" data-project="bowtie" data-category="safety" aria-label="Explore BowTie Risk Analysis"><img loading="lazy" decoding="async" src="/projects/bowtie-risk-analysis.webp" alt="BowTie Risk Analysis preview"><div class="project-overlay"></div><div class="project-top"><span>HSE &amp; Safety</span><i>Explore ↗</i></div><div class="project-copy"><h3>BowTie Risk Analysis</h3><p>Explore threats, consequences and the barriers between them</p></div></button>
+        <button class="project project-custom" type="button" data-project="moc" data-category="operations" aria-label="Explore MOC &amp; Action Tracker"><img loading="lazy" decoding="async" src="/projects/moc-tracker.webp" alt="MOC &amp; Action Tracker preview"><div class="project-overlay"></div><div class="project-top"><span>Operations</span><i>Explore ↗</i></div><div class="project-copy"><h3>MOC &amp; Action Tracker</h3><p>Manage change requests, approvals, actions and deadlines</p></div></button>
+        <button class="project project-custom" type="button" data-project="media" data-category="analytics" aria-label="Explore Media Buyer Analytics Studio"><img loading="lazy" decoding="async" src="/projects/media-buyer.webp" alt="Media Buyer Analytics Studio preview"><div class="project-overlay"></div><div class="project-top"><span>Data &amp; Analytics</span><i>Explore ↗</i></div><div class="project-copy"><h3>Media Buyer Analytics Studio</h3><p>Bring campaign spend and performance into one usable view</p></div></button>
+        <button class="project project-custom" type="button" data-project="mcdc" data-category="learning" aria-label="Explore MCDC Academy Platform"><img loading="lazy" decoding="async" src="/projects/mcdc-academy.webp" alt="MCDC Academy Platform preview"><div class="project-overlay"></div><div class="project-top"><span>Learning &amp; Platforms</span><i>Explore ↗</i></div><div class="project-copy"><h3>MCDC Academy Platform</h3><p>Coordinate academy operations, tournament data and results</p></div></button>
+      </div><div class="portfolio-footnote">New systems are illustrated with concept previews until real product screenshots are available</div>
     </section>
 
+    <section class="section process panel build-approach" id="process" data-scene="3"><div class="panel-inner c4d-mobile-anchor" aria-hidden="true"></div>
+      <div class="approach-heading"><span class="approach-eyebrow">OUR APPROACH</span><h2>How we tailor <em>your system</em></h2><p>From your real requirements to a product your team feels at home using</p></div>
+      <div class="approach-layout">
+        <div class="approach-steps" role="group" aria-label="How we build custom software">
+          <button class="approach-step is-active" type="button" data-phase="discover" aria-pressed="true"><span>01</span><div><b>Understand the work</b><small>People, pain points and the way things happen today</small></div><i>↗</i></button>
+          <button class="approach-step" type="button" data-phase="map" aria-pressed="false"><span>02</span><div><b>Map the real workflow</b><small>Forms, owners, rules, approvals and exceptions</small></div><i>↗</i></button>
+          <button class="approach-step" type="button" data-phase="shape" aria-pressed="false"><span>03</span><div><b>Shape the experience</b><small>Useful screens, permissions and familiar language</small></div><i>↗</i></button>
+          <button class="approach-step" type="button" data-phase="build" aria-pressed="false"><span>04</span><div><b>Build and test together</b><small>Real scenarios, feedback and practical refinements</small></div><i>↗</i></button>
+          <button class="approach-step" type="button" data-phase="evolve" aria-pressed="false"><span>05</span><div><b>Launch and improve</b><small>A working system that can grow with your needs</small></div><i>↗</i></button>
+        </div>
+        <div class="approach-preview" id="approach-preview" aria-live="polite">
+          <div class="approach-preview-chrome"><span><i></i><i></i><i></i></span><b>YOUR WORKFLOW · BUILD PLAN</b><small id="approach-index">01 / 05</small></div>
+          <div class="approach-preview-body"><div class="approach-preview-heading"><span id="approach-kicker">DISCOVERY</span><h3 id="approach-title">Start with your operation, not a template</h3><p id="approach-desc">We learn how work moves between your people, where it gets stuck and what a useful system must do</p></div>
+            <div class="approach-blueprint" aria-label="Tailored system diagram"><div class="blueprint-label">SYSTEM BLUEPRINT</div><div class="blueprint-track"><div class="blueprint-piece blueprint-first"><i>01</i><b id="approach-node-1">Your people</b><small id="approach-sub-1">Roles and access</small></div><div class="blueprint-edge"><i></i></div><div class="blueprint-piece blueprint-second"><i>02</i><b id="approach-node-2">Your process</b><small id="approach-sub-2">Steps and exceptions</small></div><div class="blueprint-edge"><i></i></div><div class="blueprint-piece blueprint-third"><i>03</i><b id="approach-node-3">Your system</b><small id="approach-sub-3">Designed to fit</small></div></div></div>
+            <div class="approach-deliverable"><span>WHAT YOU GET AT THIS STAGE</span><strong id="approach-result">A shared picture of the problem we're solving</strong></div></div>
+        </div>
+      </div>
+      <div class="tailor-proof"><div><b>Built around <em>your</em> details</b><p>Your rules, your forms, your terminology, your reporting — no forced one-size-fits-all process</p></div><button type="button" data-open-inquiry>Tell us what you need <span>↗</span></button></div>
+    </section>
 
+    <section class="section outcomes-section" id="outcomes"><div class="outcomes-head"><span>THE RESULT</span><h2>Software your team <em>can actually use</em></h2><p>Less time adjusting your process to fit a tool, more time using a tool that fits your process</p></div><div class="outcomes-grid"><div><span>01</span><b>Clear ownership</b><p>Everyone knows what's assigned and what happens next</p></div><div><span>02</span><b>Connected information</b><p>Fewer copies of the same data across disconnected tools</p></div><div><span>03</span><b>Relevant visibility</b><p>Reports and dashboards based on what your team needs to see</p></div><div><span>04</span><b>Room to grow</b><p>Adapt forms, workflows and integrations as needs change</p></div></div></section>
 
-    <section class="cta-section panel" id="contact" data-scene="5"><div class="panel-inner c4d-mobile-anchor" aria-hidden="true"></div><div class="cta-glow"></div><div class="cta-brand"><img loading="lazy" decoding="async" src="/brand/boostmind-logo.webp" alt="Boost Mind Technology" width="900" height="236"></div><div class="cta-copy"><span>Have something in mind?</span><h2>Let’s build it together</h2><div class="contact-actions"><button class="cta-button" type="button" data-open-inquiry>Start a project <b>↗</b></button><a class="contact-email" href="mailto:info@boostmind-tech.com"><small>Email</small><strong>info@boostmind-tech.com</strong></a></div></div></section>
+    <section class="cta-section panel" id="contact" data-scene="5"><div class="panel-inner c4d-mobile-anchor" aria-hidden="true"></div><div class="cta-glow"></div><div class="cta-brand"><img loading="lazy" decoding="async" src="/brand/boostmind-logo.webp" alt="Boost Mind Technology" width="900" height="236"></div><div class="cta-copy"><span>Have a process that needs a better system?</span><h2>Let’s build it <em>around you</em></h2><div class="contact-actions"><button class="cta-button" type="button" data-open-inquiry>Start a project <b>↗</b></button><a class="contact-email" href="mailto:info@boostmind-tech.com"><small>Email</small><strong>info@boostmind-tech.com</strong></a></div></div></section>
   </main>
 
-  <footer><div class="footer-brand footer-brand-full"><img loading="lazy" decoding="async" src="/brand/boostmind-logo.webp" alt="Boost Mind Technology" width="900" height="236"></div><p>Software · Dashboards · Automation · Integrations</p><a class="footer-email" href="mailto:info@boostmind-tech.com">info@boostmind-tech.com</a><span>© 2026 Boost Mind</span></footer>
+  <footer><div class="footer-brand footer-brand-full"><img loading="lazy" decoding="async" src="/brand/boostmind-logo.webp" alt="Boost Mind Technology" width="900" height="236"></div><p>Tailored software · Workflows · HSE · Analytics · Learning</p><a class="footer-email" href="mailto:info@boostmind-tech.com">info@boostmind-tech.com</a><span>© 2026 Boost Mind</span></footer>
 
   <dialog class="project-modal" id="project-modal"><div class="modal-shell"><button class="modal-close" id="project-close" aria-label="Close">×</button><div class="modal-media"><img id="project-image" src="" alt=""><video id="project-video" controls playsinline hidden></video><button class="play-demo" id="play-demo" hidden>Play product demo ▶</button></div><div class="modal-copy"><span id="project-category"></span><h2 id="project-title"></h2><p id="project-description"></p><div id="project-tags" class="project-tags"></div></div></div></dialog>
 
@@ -165,7 +181,7 @@
   <p class="form-direct-email">Or email us at <a href="mailto:info@boostmind-tech.com">info@boostmind-tech.com</a></p>
 </form><div class="inquiry-success" id="inquiry-success" hidden><div>✓</div><h3>Project brief sent</h3><p>Thanks, we’ll get back to you soon</p><button type="button" id="success-close">Close</button></div></div></div></dialog>
 
-  <script type="module" src="/src/main.js?v=39"></script>
+  <script type="module" src="/src/main.js?v=40"></script>
   <!-- C4D engine is loaded progressively by /src/main.js after first paint -->
 </body>
 </html>
