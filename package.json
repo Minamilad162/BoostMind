@@ -1,7 +1,7 @@
 {
-  "name": "boost-mind-custom-solutions-v40",
+  "name": "boost-mind-real-product-previews-v41",
   "private": true,
-  "version": "40.0.0",
+  "version": "41.0.0",
   "type": "module",
   "engines": {
     "node": ">=20"

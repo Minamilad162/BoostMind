@@ -29,3 +29,6 @@ Cloudflare Pages build command: `npm run build`, output directory: `dist`
 See `MEDIA_REUSE_NOTE.md` for demo video handling and `CLOUDFLARE_EMAIL_SETUP.md` for required Cloudflare Email Service configuration
 
 New project illustrations in `public/projects/*.svg` are original concept visuals, **not actual product screenshots**
+
+## v41 Real Portfolio Images
+User-supplied screenshots are now used for Stop Card, Action Tracker, 3D Process Simulation, BowTie Risk Analysis and SEVERO Spatial Experience. The five screenshots have card-sized and full-resolution WebP variants. See `V41_REAL_SCREENSHOTS.md`.

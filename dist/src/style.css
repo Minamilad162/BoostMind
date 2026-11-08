@@ -1882,3 +1882,37 @@ html{scroll-behavior:smooth}
  .statement.strip p{color:#c6e6ff!important;font-size:13px!important}
  .statement.strip h2{color:#fff!important;font-size:clamp(21px,3.6vw,29px)!important;line-height:1.2!important}
 }
+
+
+/* v41: user-provided product screenshots + helpful visual context in pain-point cards */
+.friction-card{padding-top:0!important}
+.friction-visual{position:relative;margin:0 -25px 21px;display:block;height:138px;overflow:hidden;background:linear-gradient(135deg,#e1f2ff,#f4faff);border-bottom:1px solid #d7e7f5;isolation:isolate}
+.friction-visual img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 32%;filter:saturate(.88);transition:transform .55s cubic-bezier(.2,.7,.3,1)}
+.friction-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#eff8ff12 12%,#eef8fff6 100%);pointer-events:none}
+.friction-visual span{position:absolute;z-index:1;right:15px;bottom:12px;display:block;max-width:85%;padding:6px 9px;border-radius:9px;background:#fffdfbea;border:1px solid #dfedf8;color:#14528b;text-transform:uppercase;letter-spacing:.09em;font-weight:800;font-size:9px}
+.friction-card:hover .friction-visual img{transform:scale(1.045)}
+/* Legibility: tall product screenshots use image-first cards, the original images remain complete in popups */
+.projects-v40 .project img{object-position:50% 38%}
+.projects-v40 .project-severo img{object-position:50% 50%}
+.projects-v40 .project:hover img{transform:scale(1.025)}
+@media(max-width:700px){
+  .friction-card{padding:0 20px 20px!important}
+  .friction-visual{height:102px;margin:0 -20px 16px}
+  .friction-visual span{font-size:8px;bottom:8px;right:11px}
+  .friction-symbol{margin-bottom:10px}
+  .friction-card .friction-fix{margin-top:2px}
+  .projects-v40 .project img{object-position:50% 35%}
+}
+@media(prefers-reduced-motion:reduce){.friction-visual img{transition:none!important;transform:none!important}}
+
+/* v41: real software screenshots are displayed at useful width in the project detail */
+.project-modal.has-wide-preview .modal-shell{grid-template-columns:minmax(0,1fr);width:min(1140px,calc(100% - 30px));margin:3.5vh auto;max-height:93vh}
+.project-modal.has-wide-preview .modal-media{height:auto;min-height:0;aspect-ratio:1.96/1;display:grid;place-items:center;background:#eef4f9}
+.project-modal.has-wide-preview .modal-media img{width:100%;height:100%;object-fit:contain}
+.project-modal.has-wide-preview .modal-copy{padding:25px clamp(20px,4vw,48px) 30px}
+.project-modal.has-wide-preview .modal-copy h2{margin:10px 0 12px;font-size:clamp(24px,3vw,37px)}
+@media(max-width:700px){
+  .project-modal.has-wide-preview .modal-shell{width:calc(100% - 18px);margin:2vh auto;max-height:96vh}
+  .project-modal.has-wide-preview .modal-media{min-height:0!important;aspect-ratio:1.52/1}
+  .project-modal.has-wide-preview .modal-copy{padding:20px 20px 26px}
+}
