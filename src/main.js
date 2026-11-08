@@ -86,16 +86,107 @@ const approachData={
   evolve:{index:'05 / 05',kicker:'LAUNCH & EVOLVE',title:'Go live with room to change',description:'We prepare the handover, support adoption and make room for new requirements as the operation grows',steps:[['Launch','Go-live support'],['Learn','User feedback'],['Grow','New needs']],result:'A system that can evolve with the business'}
 };
 const approachButtons=qsa('.approach-step');
-function activateApproach(key){
-  const data=approachData[key];if(!data)return;
-  approachButtons.forEach(b=>{const active=b.dataset.phase===key;b.classList.toggle('is-active',active);b.setAttribute('aria-pressed',String(active))});
-  const fields={'#approach-index':data.index,'#approach-kicker':data.kicker,'#approach-title':data.title,'#approach-desc':data.description,'#approach-result':data.result};
-  Object.entries(fields).forEach(([sel,val])=>{const el=qs(sel);if(el)el.textContent=val});
-  data.steps.forEach(([title,sub],i)=>{const n=i+1;qs('#approach-node-'+n).textContent=title;qs('#approach-sub-'+n).textContent=sub});
-  const panel=qs('#approach-preview');panel?.classList.remove('approach-swap');
-  if(!motionReduced&&panel){void panel.offsetWidth;panel.classList.add('approach-swap')}
+const approachKeys=['discover','map','shape','build','evolve'];
+const approachPreview=qs('#approach-preview');
+const approachRegion=qs('#process');
+const approachStepList=qs('.approach-steps');
+const approachPlayButton=qs('#approach-play-toggle');
+const approachLoopMs=6800;
+let currentApproachKey='discover';
+let approachAutoplayEnabled=!motionReduced;
+let approachVisible=false;
+let approachUserInteracting=false;
+let approachCycleTimer=null;
+const approachCoreNames={discover:'Discovery',map:'Workflow',shape:'Design',build:'Build & test',evolve:'Launch'};
+const approachPhaseLabels={discover:'DISCOVERY',map:'WORKFLOW',shape:'EXPERIENCE',build:'VALIDATION',evolve:'EVOLUTION'};
+
+function activateApproach(key, {manual=false}={}){
+  const data=approachData[key];
+  if(!data||!approachPreview)return;
+  currentApproachKey=key;
+  if(manual)approachAutoplayEnabled=false;
+  approachButtons.forEach(button=>{
+    const active=button.dataset.phase===key;
+    button.classList.toggle('is-active',active);
+    button.setAttribute('aria-pressed',String(active));
+  });
+  const fields={
+    '#approach-index':data.index,
+    '#approach-kicker':data.kicker,
+    '#approach-title':data.title,
+    '#approach-desc':data.description,
+    '#approach-result':data.result,
+    '#approach-core-title':approachCoreNames[key],
+    '#approach-lab-phase':'PHASE '+data.index.slice(0,2)+' · '+approachPhaseLabels[key]
+  };
+  Object.entries(fields).forEach(([selector,value])=>{
+    const el=qs(selector);
+    if(el)el.textContent=value;
+  });
+  data.steps.forEach(([title,sub],i)=>{
+    const n=i+1, node=qs('#approach-node-'+n), detail=qs('#approach-sub-'+n);
+    if(node)node.textContent=title;
+    if(detail)detail.textContent=sub;
+  });
+  approachPreview.dataset.activePhase=key;
+  approachPreview.setAttribute('aria-live',manual?'polite':'off');
+  approachPreview.classList.remove('approach-swap');
+  if(!motionReduced){void approachPreview.offsetWidth;approachPreview.classList.add('approach-swap')}
+  syncApproachAnimation();
 }
-approachButtons.forEach(btn=>btn.addEventListener('click',()=>activateApproach(btn.dataset.phase)));
+
+function syncApproachAnimation(){
+  if(!approachPreview)return;
+  if(approachCycleTimer!==null){clearTimeout(approachCycleTimer);approachCycleTimer=null}
+  const allowCycle=approachAutoplayEnabled&&approachVisible&&!approachUserInteracting&&!document.hidden;
+  approachPreview.classList.toggle('is-playing',allowCycle);
+  approachPreview.classList.toggle('is-in-view',approachVisible&&!document.hidden);
+  if(approachPlayButton){
+    approachPlayButton.setAttribute('aria-pressed',String(approachAutoplayEnabled));
+    approachPlayButton.setAttribute('aria-label',approachAutoplayEnabled?'Pause automatic stage tour':'Play automatic stage tour');
+    const symbol=qs('.approach-play-icon',approachPlayButton),label=qs('.approach-play-label',approachPlayButton);
+    if(symbol)symbol.textContent=approachAutoplayEnabled?'Ⅱ':'▶';
+    if(label)label.textContent=approachAutoplayEnabled?'Auto':'Play';
+  }
+  if(allowCycle){
+    approachCycleTimer=setTimeout(()=>{
+      const index=approachKeys.indexOf(currentApproachKey);
+      activateApproach(approachKeys[(index+1)%approachKeys.length]);
+    },approachLoopMs);
+  }
+}
+
+approachButtons.forEach(button=>button.addEventListener('click',()=>activateApproach(button.dataset.phase,{manual:true})));
+approachPlayButton?.addEventListener('click',()=>{
+  approachAutoplayEnabled=!approachAutoplayEnabled;
+  approachPreview?.setAttribute('aria-live','off');
+  syncApproachAnimation();
+});
+approachStepList?.addEventListener('pointerenter',()=>{approachUserInteracting=true;syncApproachAnimation()});
+approachStepList?.addEventListener('pointerleave',()=>{approachUserInteracting=false;syncApproachAnimation()});
+approachRegion?.addEventListener('focusin',e=>{
+  if(approachStepList?.contains(e.target)){
+    approachUserInteracting=true;
+    syncApproachAnimation();
+  }
+});
+approachRegion?.addEventListener('focusout',e=>{
+  if(approachStepList?.contains(e.target)&&!approachStepList.contains(e.relatedTarget)){
+    approachUserInteracting=false;
+    syncApproachAnimation();
+  }
+});
+document.addEventListener('visibilitychange',syncApproachAnimation);
+if(approachRegion&&'IntersectionObserver' in window){
+  const approachVisibilityObserver=new IntersectionObserver(entries=>{
+    approachVisible=entries.some(entry=>entry.isIntersecting);
+    syncApproachAnimation();
+  },{threshold:.07,rootMargin:'80px 0px'});
+  approachVisibilityObserver.observe(approachRegion);
+}else{
+  approachVisible=true;
+}
+syncApproachAnimation();
 
 // Portfolio filters: all systems remain available in the DOM and project popup.
 const portfolioFilters=qsa('.portfolio-filter'),portfolioCards=qsa('.projects-v40 .project');

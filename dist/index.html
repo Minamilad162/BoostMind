@@ -27,7 +27,7 @@
     html:not([data-desktop-c4d="1"]) .mobile-scene-portal,
     html:not([data-desktop-c4d="1"]) .c4d-mobile-anchor{display:none!important}
   </style>
-  <link rel="stylesheet" href="/src/style.css?v=43" />
+  <link rel="stylesheet" href="/src/style.css?v=44" />
   <title>Boost Mind — Software Tailored to Your Business</title>
 </head>
 <body>
@@ -177,10 +177,22 @@
           <button class="approach-step" type="button" data-phase="build" aria-pressed="false"><span>04</span><div><b>Build and test together</b><small>Real scenarios, feedback and practical refinements</small></div><i>↗</i></button>
           <button class="approach-step" type="button" data-phase="evolve" aria-pressed="false"><span>05</span><div><b>Launch and improve</b><small>A working system that can grow with your needs</small></div><i>↗</i></button>
         </div>
-        <div class="approach-preview" id="approach-preview" aria-live="polite">
-          <div class="approach-preview-chrome"><span><i></i><i></i><i></i></span><b>YOUR WORKFLOW · BUILD PLAN</b><small id="approach-index">01 / 05</small></div>
+        <div class="approach-preview" id="approach-preview" data-active-phase="discover" aria-live="off">
+          <div class="approach-preview-chrome"><span class="approach-chrome-dots" aria-hidden="true"><i></i><i></i><i></i></span><b>LIVE DESIGN STUDIO</b><div class="approach-chrome-tools"><small id="approach-index">01 / 05</small><button class="approach-play-toggle" id="approach-play-toggle" type="button" aria-pressed="true" aria-label="Pause automatic stage tour"><span class="approach-play-icon" aria-hidden="true">Ⅱ</span><span class="approach-play-label">Auto</span></button></div></div>
           <div class="approach-preview-body"><div class="approach-preview-heading"><span id="approach-kicker">DISCOVERY</span><h3 id="approach-title">Start with your operation, not a template</h3><p id="approach-desc">We learn how work moves between your people, where it gets stuck and what a useful system must do</p></div>
-            <div class="approach-blueprint" aria-label="Tailored system diagram"><div class="blueprint-label">SYSTEM BLUEPRINT</div><div class="blueprint-track"><div class="blueprint-piece blueprint-first"><i>01</i><b id="approach-node-1">Your people</b><small id="approach-sub-1">Roles and access</small></div><div class="blueprint-edge"><i></i></div><div class="blueprint-piece blueprint-second"><i>02</i><b id="approach-node-2">Your process</b><small id="approach-sub-2">Steps and exceptions</small></div><div class="blueprint-edge"><i></i></div><div class="blueprint-piece blueprint-third"><i>03</i><b id="approach-node-3">Your system</b><small id="approach-sub-3">Designed to fit</small></div></div></div>
+            
+            <div class="approach-lab" aria-label="A live illustration of how we shape a software solution">
+              <div class="approach-lab-header"><span class="approach-lab-live"><i aria-hidden="true"></i> ARCHITECTURE IN MOTION</span><span id="approach-lab-phase">PHASE 01 · DISCOVERY</span></div>
+              <div class="approach-lab-scene">
+                <div class="lab-ring lab-ring-outer" aria-hidden="true"></div><div class="lab-ring lab-ring-inner" aria-hidden="true"></div>
+                <div class="lab-ray lab-ray-first" aria-hidden="true"></div><div class="lab-ray lab-ray-second" aria-hidden="true"></div><div class="lab-ray lab-ray-third" aria-hidden="true"></div>
+                <div class="lab-module lab-module-one"><span class="lab-module-num">01</span><div><b id="approach-node-1">Your people</b><small id="approach-sub-1">Roles and access</small></div></div>
+                <div class="lab-module lab-module-two"><span class="lab-module-num">02</span><div><b id="approach-node-2">Your process</b><small id="approach-sub-2">Steps and exceptions</small></div></div>
+                <div class="lab-module lab-module-three"><span class="lab-module-num">03</span><div><b id="approach-node-3">Your system</b><small id="approach-sub-3">Designed to fit</small></div></div>
+                <div class="lab-core"><span class="lab-core-symbol" aria-hidden="true">✳</span><small>DESIGN ENGINE</small><strong id="approach-core-title">Discovery</strong><span class="lab-core-pulse"><i aria-hidden="true"></i> IN PROGRESS</span></div>
+              </div>
+              <div class="approach-lab-footer"><span>YOUR INPUT SHAPES THE SYSTEM</span><span class="lab-phase-track" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></div>
+            </div>
             <div class="approach-deliverable"><span>WHAT YOU GET AT THIS STAGE</span><strong id="approach-result">A shared picture of the problem we're solving</strong></div></div>
         </div>
       </div>
@@ -210,7 +222,7 @@
   <p class="form-direct-email">Or email us at <a href="mailto:info@boostmind-tech.com">info@boostmind-tech.com</a></p>
 </form><div class="inquiry-success" id="inquiry-success" hidden><div>✓</div><h3>Project brief sent</h3><p>Thanks, we’ll get back to you soon</p><button type="button" id="success-close">Close</button></div></div></div></dialog>
 
-  <script type="module" src="/src/main.js?v=43"></script>
+  <script type="module" src="/src/main.js?v=44"></script>
   <!-- C4D engine is loaded progressively by /src/main.js after first paint -->
 </body>
 </html>

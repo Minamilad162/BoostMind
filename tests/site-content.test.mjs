@@ -60,3 +60,19 @@ assert.ok(!css.includes('.friction-workflow.is-in-view .workflow-core-orbit{anim
 assert.ok(!css.includes('.friction-workflow.is-in-view .workflow-core-mark{animation:'));
 assert.ok(css.includes('-webkit-text-fill-color:#fff!important'));
 assert.ok(html.includes('/src/style.css?v=43'));
+
+
+// v44: orbital architecture studio with five working stages, auto-tour and manual control.
+for(const label of ['ARCHITECTURE IN MOTION','approach-lab-scene','lab-ring-outer','lab-core','approach-core-title','approach-play-toggle']) assert.ok(html.includes(label));
+assert.ok(!html.includes('class="approach-blueprint"'));
+assert.ok(js.includes('const approachLoopMs=6800'));
+assert.ok(js.includes("approachButtons.forEach(button=>button.addEventListener('click'"));
+assert.ok(js.includes("approachAutoplayEnabled=false"));
+assert.ok(js.includes("approachPreview.dataset.activePhase=key"));
+assert.ok(js.includes('IntersectionObserver'));
+assert.ok(css.includes('@keyframes bm44-orbit-outer'));
+assert.ok(css.includes('@keyframes bm44-module-enter'));
+assert.ok(css.includes('.approach-preview.is-in-view .lab-ring-outer'));
+assert.ok(css.includes('@media(prefers-reduced-motion:reduce)'));
+assert.equal((html.match(/class="approach-step(?: is-active)?"/g)||[]).length,5);
+assert.ok(html.includes('/src/style.css?v=44')&&html.includes('/src/main.js?v=44'));
