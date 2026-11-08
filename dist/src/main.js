@@ -186,7 +186,22 @@ if(approachRegion&&'IntersectionObserver' in window){
 }else{
   approachVisible=true;
 }
+
 syncApproachAnimation();
+
+// v45: keep the right preview's bottom aligned with the five steps on desktop.
+// The preview layout is compact enough to fit, while tablet/mobile keep natural height.
+const syncApproachPanelHeight=()=>{
+  if(!approachStepList || !approachPreview)return;
+  const height=Math.ceil(approachStepList.getBoundingClientRect().height);
+  if(height>0)approachPreview.style.setProperty('--approach-peer-height',height+'px');
+};
+syncApproachPanelHeight();
+if('ResizeObserver' in window && approachStepList){
+  const approachSizeObserver=new ResizeObserver(syncApproachPanelHeight);
+  approachSizeObserver.observe(approachStepList);
+}
+window.addEventListener('resize',syncApproachPanelHeight,{passive:true});
 
 // Portfolio filters: all systems remain available in the DOM and project popup.
 const portfolioFilters=qsa('.portfolio-filter'),portfolioCards=qsa('.projects-v40 .project');

@@ -76,3 +76,13 @@ assert.ok(css.includes('.approach-preview.is-in-view .lab-ring-outer'));
 assert.ok(css.includes('@media(prefers-reduced-motion:reduce)'));
 assert.equal((html.match(/class="approach-step(?: is-active)?"/g)||[]).length,5);
 assert.ok(html.includes('/src/style.css?v=44')&&html.includes('/src/main.js?v=44'));
+
+// v45: dynamic desktop alignment + compact responsive scene retain v44 features.
+assert.ok(js.includes("const syncApproachPanelHeight="));
+assert.ok(js.includes("approachPreview.style.setProperty('--approach-peer-height'"));
+assert.ok(css.includes('height:var(--approach-peer-height,380px)'));
+assert.ok(css.includes('@media(max-width:1100px)'));
+assert.ok(css.includes('.approach-lab-scene{height:218px}'));
+assert.ok(html.includes('LIVE DESIGN STUDIO'));
+assert.ok(js.includes('approachAutoplayEnabled=!motionReduced'));
+assert.ok(css.includes('@keyframes bm44-orbit-outer'));

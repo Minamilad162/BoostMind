@@ -1,7 +1,7 @@
 {
-  "name": "boost-mind-live-design-studio-v44",
+  "name": "boost-mind-live-design-studio-v45",
   "private": true,
-  "version": "44.0.0",
+  "version": "45.0.0",
   "type": "module",
   "engines": {
     "node": ">=20"

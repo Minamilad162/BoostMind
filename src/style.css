@@ -2215,3 +2215,104 @@ html{scroll-behavior:smooth}
  .approach-preview .lab-core{transform:translate(-50%,-50%)!important}
  .approach-preview .lab-module{opacity:1!important;filter:none!important}
 }
+
+/* v45 — align Live Design Studio with the five steps; keep motion & content intact. */
+@media(min-width:1101px){
+  .approach-layout{align-items:start}
+  .approach-preview{
+    box-sizing:border-box;
+    height:var(--approach-peer-height,380px);
+    min-height:0;
+  }
+  .approach-preview-chrome{min-height:40px;padding:8px 14px}
+  .approach-preview-body{
+    flex:1 1 auto;
+    min-height:0;
+    padding:11px 18px 12px!important;
+    gap:8px!important;
+  }
+  .approach-preview-heading{flex:0 0 auto}
+  .approach-preview-heading>span{font-size:9px}
+  .approach-preview-heading h3{
+    font-size:clamp(21px,1.85vw,26px)!important;
+    line-height:1.1!important;
+    margin:5px 0 4px!important;
+  }
+  .approach-preview-heading>p{font-size:11px;line-height:1.32;max-width:none}
+  .approach-lab{
+    display:flex;flex-direction:column;
+    flex:1 1 auto;
+    min-height:150px;
+    border-radius:14px;
+  }
+  .approach-lab-header,.approach-lab-footer{
+    flex:0 0 auto;
+    min-height:24px;
+    padding:6px 12px;
+  }
+  .approach-lab-header span,.approach-lab-footer span{font-size:8px}
+  .approach-lab-scene{flex:1 1 auto;height:auto;min-height:104px}
+  .lab-ring-outer{width:138px;height:138px}
+  .lab-ring-inner{width:112px;height:112px}
+  .lab-core{width:94px;height:94px;gap:1px}
+  .lab-core::before{inset:5px}
+  .lab-core-symbol{font-size:17px}
+  .lab-core>small{font-size:6.5px}
+  .lab-core strong{font-size:13px;max-width:82px}
+  .lab-core-pulse{font-size:6px;margin-top:1px}
+  .lab-core-pulse i{width:4px;height:4px}
+  .lab-module{padding:7px 9px;gap:6px;width:min(137px,30%);border-radius:10px}
+  .lab-module-num{flex:0 0 20px;height:20px;font-size:8px;border-radius:6px}
+  .lab-module>div{gap:2px}
+  .lab-module b{font-size:10px}
+  .lab-module small{font-size:8px}
+  .lab-module-one{top:10%;left:5%}
+  .lab-module-two{top:10%;right:5%}
+  .lab-module-three{bottom:7%;right:5%}
+  .approach-deliverable{
+    flex:0 0 auto;
+    margin-top:0;
+    border-radius:10px;
+    padding:7px 12px;
+    gap:2px;
+  }
+  .approach-deliverable span{font-size:8px}
+  .approach-deliverable strong{font-size:11px;line-height:1.25}
+}
+/* Tablet and mobile: the columns stack, so avoid a forced equal-height card. */
+@media(max-width:1100px){
+  .approach-preview{height:auto;min-height:0}
+  .approach-preview-body{gap:12px;padding:19px 17px!important}
+  .approach-lab-scene{height:232px}
+  .lab-ring-outer{width:205px;height:205px}
+  .lab-ring-inner{width:160px;height:160px}
+  .lab-core{width:122px;height:122px;gap:3px}
+  .lab-core-symbol{font-size:21px}
+  .lab-core strong{font-size:17px}
+  .lab-module{padding:10px 8px;width:min(128px,29%)}
+}
+@media(max-width:700px){
+  .approach-preview-body{padding:17px 12px!important;gap:11px!important}
+  .approach-lab-scene{height:218px}
+  .lab-ring-outer{width:170px;height:170px}
+  .lab-ring-inner{width:136px;height:136px}
+  .lab-core{height:110px;width:110px;gap:2px}
+  .lab-core-symbol{font-size:19px}
+  .lab-core strong{font-size:15px}
+  .lab-core>small{font-size:7px}
+  .lab-core-pulse{font-size:6px}
+  .lab-module{width:100px;padding:7px 6px;gap:5px}
+  .lab-module-num{flex-basis:18px;height:18px;font-size:8px}
+  .lab-module b{font-size:9px}
+  .lab-module small{font-size:7.5px}
+  .lab-module-one{top:4%;left:1%}
+  .lab-module-two{top:4%;right:1%}
+  .lab-module-three{bottom:4%;right:1%}
+  .approach-lab-header,.approach-lab-footer{padding:9px 10px}
+}
+@media(max-width:360px){
+  .lab-ring-outer{width:158px;height:158px}
+  .lab-ring-inner{width:124px;height:124px}
+  .lab-core{width:100px;height:100px}
+  .lab-module{width:91px}
+}
