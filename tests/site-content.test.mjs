@@ -41,8 +41,22 @@ console.log('Site coverage: PASS — all 8 requested projects, 12 cards, no Keme
 // v42: animation must be progressive, accessible, lightweight and non-destructive.
 assert.ok(html.includes('class="friction-workflow"'));
 assert.ok(html.includes('class="workflow-wires"'));
-for(const label of ['Requests','Data','Team input','Custom<br>Solution','Clearer workflows','Connected visibility']) assert.ok(html.includes(label));
+for(const label of ['Requests','Data','Team input','class="workflow-core-title"','Clearer workflows','Connected visibility']) assert.ok(html.includes(label));
 assert.equal((html.match(/class="friction-card"/g)||[]).length,3);
 assert.ok(js.includes("workflowObserver.observe(workflowGraphic)"));
 assert.ok(css.includes('.friction-workflow.is-in-view .workflow-wire-flow'));
 assert.ok(css.includes('@media(prefers-reduced-motion:reduce)'));
+
+
+// v43: card + both words animate continuously (not dependent on visibility or hover).
+assert.ok(html.includes('<span class="workflow-title-line">Custom</span>'));
+assert.ok(html.includes('<span class="workflow-title-line">Solution</span>'));
+assert.ok(css.includes('.workflow-core .workflow-title-line{'));
+assert.ok(css.includes('animation:bm-v43-core-float 5.4s'));
+assert.ok(css.includes('animation:bm-v43-title-shimmer 5.6s'));
+assert.ok(css.includes('.workflow-core-orbit{animation:bm-workflow-halo'));
+assert.ok(css.includes('.workflow-core-mark{animation:bm-workflow-mark'));
+assert.ok(!css.includes('.friction-workflow.is-in-view .workflow-core-orbit{animation:'));
+assert.ok(!css.includes('.friction-workflow.is-in-view .workflow-core-mark{animation:'));
+assert.ok(css.includes('-webkit-text-fill-color:#fff!important'));
+assert.ok(html.includes('/src/style.css?v=43'));

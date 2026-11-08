@@ -1,7 +1,7 @@
 {
-  "name": "boost-mind-animated-workflow-v42",
+  "name": "boost-mind-animated-workflow-v43",
   "private": true,
-  "version": "42.0.0",
+  "version": "43.0.0",
   "type": "module",
   "engines": {
     "node": ">=20"

@@ -1957,8 +1957,8 @@ html{scroll-behavior:smooth}
 .friction-workflow.is-in-view .workflow-wire-flow{opacity:.95;animation:bm-workflow-stream 3.4s linear infinite}
 .friction-workflow.is-in-view .workflow-wire-delay{animation-delay:-1.3s}
 .friction-workflow.is-in-view .workflow-wire-outflow{animation-delay:-1.8s}
-.friction-workflow.is-in-view .workflow-core-orbit{animation:bm-workflow-halo 3.3s ease-in-out infinite}
-.friction-workflow.is-in-view .workflow-core-mark{animation:bm-workflow-mark 3s ease-in-out infinite}
+.workflow-core-orbit{animation:bm-workflow-halo 3.3s ease-in-out infinite}
+.workflow-core-mark{animation:bm-workflow-mark 3s ease-in-out infinite}
 .friction-workflow.is-in-view .workflow-kicker i,.friction-workflow.is-in-view .workflow-result-indicator i{animation:bm-workflow-dot 2.4s ease-in-out infinite}
 @keyframes bm-workflow-stream{from{stroke-dashoffset:0}to{stroke-dashoffset:-120}}
 @keyframes bm-workflow-halo{0%,100%{box-shadow:0 0 0 8px #8acef911;opacity:.75}50%{box-shadow:0 0 0 16px #8acef91e;opacity:1}}
@@ -1996,4 +1996,82 @@ html{scroll-behavior:smooth}
 @media(prefers-reduced-motion:reduce){
  .friction-workflow *, .friction-workflow *::before, .friction-workflow *::after{animation:none!important;transition:none!important}
  .workflow-wire-flow{opacity:.5!important}
+}
+
+
+/* v43 — the central solution card and its typography loop on their own, without hover or scroll triggers. */
+.workflow-core{
+  isolation:isolate;
+  background-size:220% 220%;
+  will-change:transform;
+  animation:bm-v43-core-float 5.4s ease-in-out infinite,
+            bm-v43-core-gradient 11s ease-in-out infinite,
+            bm-v43-core-glow 5.4s ease-in-out infinite;
+}
+.workflow-core::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  z-index:0;
+  pointer-events:none;
+  background:linear-gradient(108deg,transparent 19%,rgba(195,245,255,.02) 34%,rgba(214,250,255,.20) 48%,rgba(219,251,255,.06) 54%,transparent 70%);
+  background-size:260% 100%;
+  animation:bm-v43-card-sheen 6.6s linear infinite;
+}
+.workflow-core>:not(.workflow-core-orbit){position:relative;z-index:1}
+.workflow-core-orbit{z-index:2}
+.workflow-core-title{display:grid;justify-items:center;gap:0}
+.workflow-core .workflow-title-line{
+  display:block;
+  color:#fff;
+  -webkit-text-fill-color:transparent;
+  background-image:linear-gradient(105deg,#fff 0%,#fff 30%,#baf5ff 46%,#fff 62%,#fff 100%);
+  background-size:240% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  will-change:transform;
+  animation:bm-v43-title-shimmer 5.6s linear infinite,
+            bm-v43-title-hover 4.6s ease-in-out infinite;
+}
+.workflow-core .workflow-title-line:nth-child(2){animation-delay:-2.4s,-2.3s}
+.workflow-core>small{animation:bm-v43-eyebrow 4.6s ease-in-out infinite}
+.workflow-core-detail{animation:bm-v43-pill 4.6s ease-in-out infinite}
+@keyframes bm-v43-core-float{
+  0%,100%{transform:translate3d(0,0,0)}
+  50%{transform:translate3d(0,-5px,0)}
+}
+@keyframes bm-v43-core-gradient{
+  0%,100%{background-position:0% 40%}
+  50%{background-position:100% 60%}
+}
+@keyframes bm-v43-core-glow{
+  0%,100%{box-shadow:0 18px 40px #0a65a040,inset 0 1px 0 #ffffff66}
+  50%{box-shadow:0 24px 48px #0a7aaf70,0 0 26px #43c8f73c,inset 0 1px 0 #ffffff8a}
+}
+@keyframes bm-v43-card-sheen{
+  0%{background-position:180% 0}
+  100%{background-position:-150% 0}
+}
+@keyframes bm-v43-title-shimmer{
+  0%{background-position:165% 0}
+  100%{background-position:-165% 0}
+}
+@keyframes bm-v43-title-hover{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-2px)}
+}
+@keyframes bm-v43-eyebrow{
+  0%,100%{opacity:.88}
+  50%{opacity:1}
+}
+@keyframes bm-v43-pill{
+  0%,100%{box-shadow:0 0 0 rgba(156,238,255,0);border-color:#b2eaff66}
+  50%{box-shadow:0 0 15px #9ceeff45;border-color:#d3f6ffab}
+}
+/* Accessibility: a stable card and fully opaque readable title when reduced motion is requested. */
+@media(prefers-reduced-motion:reduce){
+  .workflow-core{transform:none!important;will-change:auto!important}
+  .workflow-core .workflow-title-line{color:#fff!important;-webkit-text-fill-color:#fff!important;background-image:none!important;will-change:auto!important;transform:none!important}
+  .workflow-core::after{display:none!important}
 }
