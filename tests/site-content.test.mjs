@@ -17,7 +17,7 @@ assert.ok(html.includes('id="tailor-explorer"')&&html.includes('id="approach-pre
 assert.ok(html.includes('class="portfolio-filters"'));
 assert.ok(css.includes('prefers-reduced-motion:reduce'));
 assert.ok(!html.includes('06 Projects')&&!html.includes('01 / CAPABILITIES'));
-assert.ok(js.includes('if(!desktopC4DEnabled)'));
+assert.ok(js.includes("if(document.documentElement.getAttribute('data-mobile-ui')==='1')"));
 for(const file of ['stop-card.svg','incident-investigation.svg','action-tracker.svg','technica-lms.svg','3d-process-safety.svg','3d-process-simulation.svg']){
  const contents=await readFile(new URL(`../public/projects/${file}`,import.meta.url),'utf8');
  assert.ok(contents.startsWith('<svg'));
@@ -35,7 +35,7 @@ assert.ok(css.includes('.project-modal.has-wide-preview .modal-media'));
 assert.ok(html.includes('data-project="severo"'));
 assert.ok(html.includes('src="/projects/stop-card-card.webp"'));
 assert.ok(html.includes('src="/projects/bowtie-risk-analysis-card.webp"'));
-console.log('Site coverage: PASS — all 8 requested projects, 12 cards, no Kemet/Padel, no mobile C4D');
+console.log('Site coverage: PASS — original C4D supported on desktop and capable mobile devices');
 
 
 // v42: animation must be progressive, accessible, lightweight and non-destructive.
