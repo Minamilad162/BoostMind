@@ -96,3 +96,14 @@ assert.ok(!html.includes('desktop-c4d-fallback')&&!css.includes('.desktop-c4d-fa
 assert.ok(css.includes('html[data-desktop-c4d="1"] #home #visual-stage'));
 assert.ok(js.includes("import('/assets/c4d-scroll-engine.js?v=37')"));
 assert.ok(html.includes('/src/style.css?v=47')&&html.includes('/src/main.js?v=47'));
+
+// v48: the ORIGINAL minified C4D scene loads directly and independently
+// from the main UI script. There must never be a replacement illustration.
+const boot = await readFile(new URL('../public/assets/c4d-bootstrap.js',import.meta.url),'utf8');
+assert.ok(html.includes('/assets/c4d-bootstrap.js?v=48'));
+assert.ok(html.includes('/src/style.css?v=48')&&html.includes('/src/main.js?v=48'));
+assert.ok(boot.includes("await import('/assets/c4d-scroll-engine.js?v=37')"));
+assert.ok(!js.includes("import('/assets/c4d-scroll-engine.js?v=37')"));
+assert.ok(boot.includes('c4d-webgl-error'));
+assert.ok(!html.includes('desktop-c4d-fallback')&&!css.includes('.desktop-c4d-fallback'));
+assert.ok(css.includes('html[data-desktop-c4d="1"] #home #webgl-canvas'));

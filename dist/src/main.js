@@ -211,57 +211,12 @@ portfolioFilters.forEach(button=>button.addEventListener('click',()=>{
   portfolioCards.forEach(card=>{card.hidden=!(group==='all'||card.dataset.category===group)});
 }));
 
-// v37: C4D is desktop-only. Mobile never loads or keeps the WebGL compositor.
-const desktopC4DEnabled = document.documentElement.getAttribute('data-desktop-c4d') === '1';
-const c4dStage=qs('#visual-stage');
-let c4dLoadPromise=null;
-const connection=navigator.connection||navigator.mozConnection||navigator.webkitConnection;
-const saveData=Boolean(connection?.saveData);
-const reducedMotion=window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-const verySlowConnection=['slow-2g','2g'].includes(connection?.effectiveType);
-
-if(!desktopC4DEnabled){
-  document.documentElement.classList.add('mobile-static-visuals');
-  c4dStage?.remove();
-  qsa('.mobile-scene-portal,.c4d-mobile-anchor canvas').forEach(el=>el.remove());
-}
-
-function loadC4D(){
-  if(!desktopC4DEnabled||c4dLoadPromise||saveData||reducedMotion)return c4dLoadPromise;
-  c4dStage?.classList.add('c4d-loading');
-  c4dLoadPromise=import('/assets/c4d-scroll-engine.js?v=37')
-    .then(()=>{
-      c4dStage?.classList.remove('c4d-loading');
-      c4dStage?.classList.add('c4d-ready');
-      document.documentElement.classList.add('c4d-ready');
-    })
-    .catch(err=>{
-      console.warn('C4D visual could not be loaded, keeping lightweight fallback',err);
-      c4dStage?.classList.remove('c4d-loading');
-      c4dStage?.classList.add('c4d-fallback');
-    });
-  return c4dLoadPromise;
-}
-
-function scheduleC4D(){
-  if(!desktopC4DEnabled)return;
-  if(saveData||reducedMotion){c4dStage?.classList.add('c4d-fallback');return;}
-  const startFromIntent=()=>setTimeout(loadC4D,40);
-  const start=()=>{
-    if(verySlowConnection){
-      ['pointerdown','scroll'].forEach(type=>window.addEventListener(type,startFromIntent,{once:true,passive:true}));
-      return;
-    }
-    if('requestIdleCallback' in window){requestIdleCallback(loadC4D,{timeout:1100});}
-    else setTimeout(loadC4D,550);
-  };
-  if(document.readyState==='complete')start();
-  else window.addEventListener('load',start,{once:true});
-  ['pointerdown','scroll'].forEach(type=>window.addEventListener(type,startFromIntent,{once:true,passive:true}));
-}
-
-scheduleC4D();
-
+// v48: Original C4D engine boots independently through /assets/c4d-bootstrap.js.
+ // This keeps the WebGL scene running even when a later page interaction fails.
+ if(document.documentElement.getAttribute('data-mobile-ui')==='1'){
+   document.getElementById('visual-stage')?.remove();
+   qsa('.mobile-scene-portal,.c4d-mobile-anchor canvas').forEach(el=>el.remove());
+ }
 
 // v23: pause non-WebGL decorative motion when it is off-screen.
 const motionSections=qsa('.process,.capability-rail');

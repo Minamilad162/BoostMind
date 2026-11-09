@@ -2318,7 +2318,7 @@ html{scroll-behavior:smooth}
 }
 /* v47 — expose the original Cinema 4D WebGL scene above the hero background.
    Engine, 3D model, logo texture and scroll animations remain the v39 originals. */
-@media (min-width:901px) and (hover:hover) and (pointer:fine){
+@media (min-width:901px){
   html[data-desktop-c4d="1"] #home{isolation:isolate}
   html[data-desktop-c4d="1"] #home #visual-stage{
     position:fixed;
@@ -2329,5 +2329,22 @@ html{scroll-behavior:smooth}
   html[data-desktop-c4d="1"] #home .hero-copy{
     position:relative;
     z-index:3;
+  }
+}
+/* v48 — keep the original WebGL canvas visible independently of its async
+   startup class; never paint a replacement illustration in the hero. */
+@media (min-width:901px){
+  html[data-desktop-c4d="1"] #home #visual-stage{
+    display:block!important;
+    visibility:visible!important;
+    opacity:1!important;
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+  }
+  html[data-desktop-c4d="1"] #home #webgl-canvas{
+    display:block!important;
+    visibility:visible!important;
+    opacity:1!important;
   }
 }
