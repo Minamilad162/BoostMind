@@ -222,7 +222,8 @@ portfolioFilters.forEach(button=>button.addEventListener('click',()=>{
 // v48: Original C4D engine boots independently through /assets/c4d-bootstrap.js.
  // This keeps the WebGL scene running even when a later page interaction fails.
  if(document.documentElement.getAttribute('data-mobile-ui')==='1'){
-   // The original C4D stage stays mounted for supported mobile WebGL devices.
+   // Keep mobile lightweight: original logo + CSS animation only.
+   document.getElementById('visual-stage')?.remove();
    qsa('.mobile-scene-portal,.c4d-mobile-anchor canvas').forEach(el=>el.remove());
  }
 

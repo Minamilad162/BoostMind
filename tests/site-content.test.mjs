@@ -95,28 +95,29 @@ assert.ok(html.indexOf('id="visual-stage"')<html.indexOf('<div class="hero-copy"
 assert.ok(!html.includes('desktop-c4d-fallback')&&!css.includes('.desktop-c4d-fallback'));
 assert.ok(css.includes('html[data-desktop-c4d="1"] #home #visual-stage'));
 assert.ok(!js.includes("import('/assets/c4d-scroll-engine.js?v=37')"));
-assert.ok(html.includes('/src/style.css?v=49')&&html.includes('/src/main.js?v=49'));
+assert.ok(html.includes('/src/style.css?v=50')&&html.includes('/src/main.js?v=50'));
 
 // v48: the ORIGINAL minified C4D scene loads directly and independently
 // from the main UI script. There must never be a replacement illustration.
 const boot = await readFile(new URL('../public/assets/c4d-bootstrap.js',import.meta.url),'utf8');
-assert.ok(html.includes('/assets/c4d-bootstrap.js?v=49'));
-assert.ok(html.includes('/src/style.css?v=49')&&html.includes('/src/main.js?v=49'));
-assert.ok(boot.includes("await import('/assets/c4d-scroll-engine.js?v=49')"));
+assert.ok(html.includes('/assets/c4d-bootstrap.js?v=50'));
+assert.ok(html.includes('/src/style.css?v=50')&&html.includes('/src/main.js?v=50'));
+assert.ok(boot.includes("await import('/assets/c4d-scroll-engine.js?v=50')"));
 assert.ok(!js.includes("import('/assets/c4d-scroll-engine.js?v=37')"));
 assert.ok(boot.includes('c4d-webgl-error'));
 assert.ok(!html.includes('desktop-c4d-fallback')&&!css.includes('.desktop-c4d-fallback'));
 assert.ok(css.includes('html[data-desktop-c4d="1"] #home #webgl-canvas'));
 
-// v49: exact original scene (not a recreated picture) works on mobile WebGL2.
-const engine = await readFile(new URL('../public/assets/c4d-scroll-engine.js', import.meta.url),'utf8');
+// v50: Desktop keeps its real 3D engine, while mobile uses its existing logo.
+const engine = await readFile(new URL('../public/assets/c4d-scroll-engine.js',import.meta.url),'utf8');
 assert.ok(engine.includes('Stage_01_Boost Mind_Core'));
-assert.ok(engine.includes('data-mobile-c4d'));
-assert.ok(!js.includes("document.getElementById('visual-stage')?.remove()"));
-assert.ok(boot.includes('heroVisual.appendChild(stage)'));
-assert.ok(boot.includes("probe.getContext('webgl2'"));
-assert.ok(boot.includes("root.classList.add('mobile-c4d-ready')"));
-assert.ok(boot.includes('IntersectionObserver'));
-assert.ok(css.includes('html[data-mobile-c4d="1"] #home .hero-visual > #visual-stage'));
-assert.ok(css.includes('html[data-mobile-c4d="1"].c4d-webgl-error'));
+assert.ok(html.includes('class="mobile-visual-mark"'));
+assert.ok(js.includes("document.getElementById('visual-stage')?.remove()"));
+assert.ok(!boot.includes('mobileCandidate'));
+assert.ok(!boot.includes('data-mobile-c4d'));
+assert.ok(boot.includes("root.getAttribute('data-desktop-c4d') === '1'"));
+assert.ok(boot.includes("await import('/assets/c4d-scroll-engine.js?v=50')"));
+assert.ok(css.includes('@keyframes bmMobileMarkFloat'));
+assert.ok(css.includes('html[data-mobile-ui="1"] #home .hero-visual .mobile-visual-mark'));
+assert.ok(css.includes('html[data-mobile-ui="1"] #home #visual-stage'));
 assert.ok(!html.includes('desktop-c4d-fallback'));
