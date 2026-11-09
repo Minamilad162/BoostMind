@@ -2316,3 +2316,112 @@ html{scroll-behavior:smooth}
   .lab-core{width:100px;height:100px}
   .lab-module{width:91px}
 }
+
+
+/* v46 — restore the hero's desktop C4D presence with a resilient branded fallback.
+   The actual existing WebGL scroll scene remains untouched and still takes priority. */
+.desktop-c4d-fallback{display:none}
+@media (min-width:901px){
+  html[data-desktop-c4d="1"] #home .hero-visual{
+    position:relative;
+    isolation:isolate;
+    min-height:440px;
+  }
+  html[data-desktop-c4d="1"] #home .desktop-c4d-fallback{
+    position:absolute;
+    inset:0;
+    display:grid;
+    place-items:center;
+    overflow:visible;
+    pointer-events:none;
+    opacity:1;
+    transition:opacity .7s ease;
+  }
+  html[data-desktop-c4d="1"] #home .desktop-c4d-fallback img{
+    display:block;
+    position:relative;
+    z-index:2;
+    width:min(64%,410px);
+    height:auto;
+    object-fit:contain;
+    filter:drop-shadow(0 28px 35px rgba(12,68,130,.24));
+    animation:bmHeroMarkFloat 6.4s ease-in-out infinite;
+    will-change:transform;
+  }
+  html[data-desktop-c4d="1"] #home .desktop-c4d-halo{
+    position:absolute;
+    width:min(88%,560px);
+    aspect-ratio:1;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(45,145,235,.11) 0%,rgba(64,183,236,.065) 36%,transparent 72%);
+    animation:bmHeroHalo 9s ease-in-out infinite;
+  }
+  html[data-desktop-c4d="1"] #home .desktop-c4d-orbit{
+    position:absolute;
+    width:min(87%,560px);
+    aspect-ratio:1.5;
+    border:1px solid rgba(35,122,202,.24);
+    border-radius:50%;
+    box-shadow:0 0 35px rgba(39,149,216,.08);
+    transform-style:preserve-3d;
+  }
+  html[data-desktop-c4d="1"] #home .desktop-c4d-orbit-one{
+    animation:bmHeroOrbitOne 12s linear infinite;
+  }
+  html[data-desktop-c4d="1"] #home .desktop-c4d-orbit-two{
+    width:min(67%,440px);
+    border-color:rgba(43,184,218,.24);
+    animation:bmHeroOrbitTwo 15s linear infinite;
+  }
+  html[data-desktop-c4d="1"] #home .desktop-c4d-spark{
+    position:absolute;
+    z-index:3;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:#299fdd;
+    box-shadow:0 0 0 10px rgba(41,159,221,.08),0 0 22px rgba(41,159,221,.32);
+    animation:bmHeroSpark 5s ease-in-out infinite;
+  }
+  html[data-desktop-c4d="1"] #home .desktop-c4d-spark-one{left:13%;top:31%}
+  html[data-desktop-c4d="1"] #home .desktop-c4d-spark-two{
+    right:13%;bottom:27%;
+    width:7px;height:7px;
+    background:#48c5e7;
+    animation-delay:-2.5s;
+  }
+  /* The fallback fades to a subtle underlying watermark once the real 3D scene loads.
+     It never leaves a completely empty hero if WebGL fails on a device. */
+  html[data-desktop-c4d="1"].c4d-ready #home .desktop-c4d-fallback{
+    opacity:.11;
+  }
+  html[data-desktop-c4d="1"].c4d-failed #home .desktop-c4d-fallback{
+    opacity:1;
+  }
+}
+@keyframes bmHeroMarkFloat{
+  0%,100%{transform:translate3d(0,0,0) rotate(-4deg)}
+  50%{transform:translate3d(0,-19px,0) rotate(3deg)}
+}
+@keyframes bmHeroOrbitOne{
+  from{transform:rotate(-25deg) rotateX(64deg) rotateZ(0)}
+  to{transform:rotate(-25deg) rotateX(64deg) rotateZ(360deg)}
+}
+@keyframes bmHeroOrbitTwo{
+  from{transform:rotate(30deg) rotateX(62deg) rotateZ(0)}
+  to{transform:rotate(30deg) rotateX(62deg) rotateZ(-360deg)}
+}
+@keyframes bmHeroHalo{
+  0%,100%{transform:scale(.95);opacity:.65}
+  50%{transform:scale(1.08);opacity:1}
+}
+@keyframes bmHeroSpark{
+  0%,100%{transform:translateY(0);opacity:.6}
+  50%{transform:translateY(-12px);opacity:1}
+}
+@media (prefers-reduced-motion:reduce){
+  .desktop-c4d-fallback,.desktop-c4d-fallback *{
+    animation:none!important;
+    transition:none!important;
+  }
+}

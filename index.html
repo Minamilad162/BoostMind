@@ -10,9 +10,13 @@
   <link rel="preload" as="image" href="/brand/boostmind-mark.webp" />
   <script>
     (function(){
-      var desktopC4D = window.matchMedia &&
-        window.matchMedia('(min-width: 901px)').matches &&
-        window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      // Treat wide desktop and hybrid mouse/touch laptops as desktop.
+      // Only coarse-pointer touch-only devices retain the lightweight mobile presentation.
+      var wideViewport = window.matchMedia && window.matchMedia('(min-width: 901px)').matches;
+      var touchOnly = window.matchMedia &&
+        window.matchMedia('(hover: none) and (pointer: coarse)').matches &&
+        !window.matchMedia('(any-pointer: fine)').matches;
+      var desktopC4D = Boolean(wideViewport && !touchOnly);
       if (desktopC4D) {
         document.documentElement.setAttribute('data-desktop-c4d','1');
       } else {
@@ -27,7 +31,7 @@
     html:not([data-desktop-c4d="1"]) .mobile-scene-portal,
     html:not([data-desktop-c4d="1"]) .c4d-mobile-anchor{display:none!important}
   </style>
-  <link rel="stylesheet" href="/src/style.css?v=45" />
+  <link rel="stylesheet" href="/src/style.css?v=46" />
   <title>Boost Mind — Software Tailored to Your Business</title>
 </head>
 <body>
@@ -56,6 +60,15 @@
         <div class="mobile-hero-signature">Build smarter <i>•</i> Connect better <i>•</i> Automate more</div>
       </div>
       <div class="hero-visual" aria-hidden="true">
+        <!-- Visible branded fallback while the original desktop Cinema 4D/WebGL scene initializes. -->
+        <div class="desktop-c4d-fallback">
+          <span class="desktop-c4d-halo"></span>
+          <span class="desktop-c4d-orbit desktop-c4d-orbit-one"></span>
+          <span class="desktop-c4d-orbit desktop-c4d-orbit-two"></span>
+          <img src="/brand/boostmind-mark.webp" alt="" width="740" height="570" decoding="async" />
+          <i class="desktop-c4d-spark desktop-c4d-spark-one"></i>
+          <i class="desktop-c4d-spark desktop-c4d-spark-two"></i>
+        </div>
         <div class="mobile-visual-orbit"></div>
         <div class="mobile-visual-panel panel-a"></div>
         <div class="mobile-visual-panel panel-b"></div>
@@ -222,7 +235,7 @@
   <p class="form-direct-email">Or email us at <a href="mailto:info@boostmind-tech.com">info@boostmind-tech.com</a></p>
 </form><div class="inquiry-success" id="inquiry-success" hidden><div>✓</div><h3>Project brief sent</h3><p>Thanks, we’ll get back to you soon</p><button type="button" id="success-close">Close</button></div></div></div></dialog>
 
-  <script type="module" src="/src/main.js?v=45"></script>
+  <script type="module" src="/src/main.js?v=46"></script>
   <!-- C4D engine is loaded progressively by /src/main.js after first paint -->
 </body>
 </html>
