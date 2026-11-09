@@ -59,7 +59,7 @@ assert.ok(css.includes('.workflow-core-mark{animation:bm-workflow-mark'));
 assert.ok(!css.includes('.friction-workflow.is-in-view .workflow-core-orbit{animation:'));
 assert.ok(!css.includes('.friction-workflow.is-in-view .workflow-core-mark{animation:'));
 assert.ok(css.includes('-webkit-text-fill-color:#fff!important'));
-assert.ok(html.includes('/src/style.css?v=43'));
+
 
 
 // v44: orbital architecture studio with five working stages, auto-tour and manual control.
@@ -75,7 +75,7 @@ assert.ok(css.includes('@keyframes bm44-module-enter'));
 assert.ok(css.includes('.approach-preview.is-in-view .lab-ring-outer'));
 assert.ok(css.includes('@media(prefers-reduced-motion:reduce)'));
 assert.equal((html.match(/class="approach-step(?: is-active)?"/g)||[]).length,5);
-assert.ok(html.includes('/src/style.css?v=44')&&html.includes('/src/main.js?v=44'));
+
 
 // v45: dynamic desktop alignment + compact responsive scene retain v44 features.
 assert.ok(js.includes("const syncApproachPanelHeight="));
@@ -86,3 +86,13 @@ assert.ok(css.includes('.approach-lab-scene{height:218px}'));
 assert.ok(html.includes('LIVE DESIGN STUDIO'));
 assert.ok(js.includes('approachAutoplayEnabled=!motionReduced'));
 assert.ok(css.includes('@keyframes bm44-orbit-outer'));
+
+// v47 regression checks: use the original C4D scene, never a new graphic.
+assert.equal((html.match(/id="visual-stage"/g)||[]).length,1);
+assert.equal((html.match(/id="webgl-canvas"/g)||[]).length,1);
+assert.ok(html.indexOf('id="visual-stage"')>html.indexOf('<section class="hero panel"'));
+assert.ok(html.indexOf('id="visual-stage"')<html.indexOf('<div class="hero-copy">'));
+assert.ok(!html.includes('desktop-c4d-fallback')&&!css.includes('.desktop-c4d-fallback'));
+assert.ok(css.includes('html[data-desktop-c4d="1"] #home #visual-stage'));
+assert.ok(js.includes("import('/assets/c4d-scroll-engine.js?v=37')"));
+assert.ok(html.includes('/src/style.css?v=47')&&html.includes('/src/main.js?v=47'));

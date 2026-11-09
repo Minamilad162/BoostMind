@@ -229,18 +229,16 @@ if(!desktopC4DEnabled){
 function loadC4D(){
   if(!desktopC4DEnabled||c4dLoadPromise||saveData||reducedMotion)return c4dLoadPromise;
   c4dStage?.classList.add('c4d-loading');
-  c4dLoadPromise=import('/assets/c4d-scroll-engine.js?v=46')
+  c4dLoadPromise=import('/assets/c4d-scroll-engine.js?v=37')
     .then(()=>{
       c4dStage?.classList.remove('c4d-loading');
       c4dStage?.classList.add('c4d-ready');
-      document.documentElement.classList.remove('c4d-failed');
       document.documentElement.classList.add('c4d-ready');
     })
     .catch(err=>{
       console.warn('C4D visual could not be loaded, keeping lightweight fallback',err);
       c4dStage?.classList.remove('c4d-loading');
       c4dStage?.classList.add('c4d-fallback');
-      document.documentElement.classList.add('c4d-failed');
     });
   return c4dLoadPromise;
 }
