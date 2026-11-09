@@ -18,7 +18,7 @@ if (root.getAttribute('data-desktop-c4d') === '1' && stage && canvas) {
   try {
     // Direct import starts on initial page load rather than a deferred idle timer.
     // Retain the unchanged original v39 engine and its scroll animation.
-    await import('/assets/c4d-scroll-engine.js?v=37');
+    await import('/assets/c4d-scroll-engine.js?v=48');
     stage.classList.remove('c4d-loading', 'c4d-fallback');
     stage.classList.add('c4d-ready');
     root.classList.remove('c4d-loading', 'c4d-webgl-error');

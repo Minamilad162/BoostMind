@@ -102,7 +102,7 @@ assert.ok(html.includes('/src/style.css?v=47')&&html.includes('/src/main.js?v=47
 const boot = await readFile(new URL('../public/assets/c4d-bootstrap.js',import.meta.url),'utf8');
 assert.ok(html.includes('/assets/c4d-bootstrap.js?v=48'));
 assert.ok(html.includes('/src/style.css?v=48')&&html.includes('/src/main.js?v=48'));
-assert.ok(boot.includes("await import('/assets/c4d-scroll-engine.js?v=37')"));
+assert.ok(boot.includes("await import('/assets/c4d-scroll-engine.js?v=48')"));
 assert.ok(!js.includes("import('/assets/c4d-scroll-engine.js?v=37')"));
 assert.ok(boot.includes('c4d-webgl-error'));
 assert.ok(!html.includes('desktop-c4d-fallback')&&!css.includes('.desktop-c4d-fallback'));
