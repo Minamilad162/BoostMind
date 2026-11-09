@@ -1,6 +1,14 @@
 const qs=(s,r=document)=>r.querySelector(s), qsa=(s,r=document)=>[...r.querySelectorAll(s)];
 const pauseC4D=()=>window.dispatchEvent(new Event('boostmind:c4d-pause'));
-const resumeC4D=()=>{if(!document.querySelector('dialog[open]'))window.dispatchEvent(new Event('boostmind:c4d-resume'))};
+const resumeC4D=()=>{
+  if(document.querySelector('dialog[open]'))return;
+  // A mobile 3D scene is confined to the hero; don't resume its renderer offscreen.
+  if(document.documentElement.hasAttribute('data-mobile-c4d')){
+    const rect=document.querySelector('#home .hero-visual')?.getBoundingClientRect();
+    if(!rect||rect.bottom<=0||rect.top>=window.innerHeight)return;
+  }
+  window.dispatchEvent(new Event('boostmind:c4d-resume'));
+};
 const menu=qs('#mobile-menu'), toggle=qs('#boost-menu-toggle');
 toggle?.addEventListener('click',()=>{const open=menu.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open))});qsa('#mobile-menu a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');toggle?.setAttribute('aria-expanded','false')}));
 
@@ -214,7 +222,7 @@ portfolioFilters.forEach(button=>button.addEventListener('click',()=>{
 // v48: Original C4D engine boots independently through /assets/c4d-bootstrap.js.
  // This keeps the WebGL scene running even when a later page interaction fails.
  if(document.documentElement.getAttribute('data-mobile-ui')==='1'){
-   document.getElementById('visual-stage')?.remove();
+   // The original C4D stage stays mounted for supported mobile WebGL devices.
    qsa('.mobile-scene-portal,.c4d-mobile-anchor canvas').forEach(el=>el.remove());
  }
 

@@ -24,13 +24,13 @@
     })();
   </script>
   <style>
-    /* v37 critical guard: C4D is desktop-only from the first paint */
+    /* v37 critical guard: C4D is hidden on mobile until WebGL2 support is checked */
     html:not([data-desktop-c4d="1"]) #visual-stage,
     html:not([data-desktop-c4d="1"]) .c4d-stage,
     html:not([data-desktop-c4d="1"]) .mobile-scene-portal,
     html:not([data-desktop-c4d="1"]) .c4d-mobile-anchor{display:none!important}
   </style>
-  <link rel="stylesheet" href="/src/style.css?v=48" />
+  <link rel="stylesheet" href="/src/style.css?v=49" />
   <title>Boost Mind — Software Tailored to Your Business</title>
 </head>
 <body>
@@ -226,8 +226,8 @@
   <p class="form-direct-email">Or email us at <a href="mailto:info@boostmind-tech.com">info@boostmind-tech.com</a></p>
 </form><div class="inquiry-success" id="inquiry-success" hidden><div>✓</div><h3>Project brief sent</h3><p>Thanks, we’ll get back to you soon</p><button type="button" id="success-close">Close</button></div></div></div></dialog>
 
-  <script type="module" src="/src/main.js?v=48"></script>
+  <script type="module" src="/src/main.js?v=49"></script>
   <!-- Independent original Cinema 4D loader; unaffected by other page animations. -->
-  <script type="module" src="/assets/c4d-bootstrap.js?v=48"></script>
+  <script type="module" src="/assets/c4d-bootstrap.js?v=49"></script>
 </body>
 </html>

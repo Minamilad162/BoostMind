@@ -2348,3 +2348,59 @@ html{scroll-behavior:smooth}
     opacity:1!important;
   }
 }
+
+
+/* v49 — original C4D/WebGL scene restored inside the existing mobile hero card.
+   Keep the old static mark as a graceful fallback on unsupported/reduced-motion devices. */
+@media (max-width:900px){
+  html[data-mobile-ui="1"][data-mobile-c4d="1"] #home .hero-visual{
+    display:block!important;
+    position:relative!important;
+    width:100%!important;
+    height:clamp(210px,56vw,282px)!important;
+    min-height:clamp(210px,56vw,282px)!important;
+    max-height:clamp(210px,56vw,282px)!important;
+    overflow:hidden!important;
+    isolation:isolate!important;
+  }
+  html[data-mobile-c4d="1"] #home .hero-visual > #visual-stage{
+    display:block!important;
+    visibility:visible!important;
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    min-width:100%!important;
+    max-width:100%!important;
+    min-height:100%!important;
+    max-height:100%!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:hidden!important;
+    pointer-events:none!important;
+    transform:none!important;
+    z-index:6!important;
+    opacity:1!important;
+  }
+  html[data-mobile-c4d="1"] #home .hero-visual > #visual-stage #webgl-canvas{
+    display:block!important;
+    visibility:visible!important;
+    width:100%!important;
+    height:100%!important;
+    opacity:1!important;
+    filter:none!important;
+    pointer-events:none!important;
+  }
+  html[data-mobile-c4d="1"].mobile-c4d-ready #home .hero-visual .mobile-visual-orbit,
+  html[data-mobile-c4d="1"].mobile-c4d-ready #home .hero-visual .mobile-visual-panel,
+  html[data-mobile-c4d="1"].mobile-c4d-ready #home .hero-visual .mobile-visual-mark,
+  html[data-mobile-c4d="1"].mobile-c4d-ready #home .hero-visual .mobile-visual-dot{
+    visibility:hidden!important;
+    opacity:0!important;
+    animation:none!important;
+  }
+  html[data-mobile-c4d="1"].c4d-webgl-error #home .hero-visual > #visual-stage{
+    display:none!important;
+    opacity:0!important;
+  }
+}
